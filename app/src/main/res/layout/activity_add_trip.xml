@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_32sdp"
         app:boxCornerRadiusBottomEnd="@dimen/_100sdp"
         app:boxCornerRadiusBottomStart="@dimen/_100sdp"
@@ -51,7 +51,7 @@
         app:boxCornerRadiusBottomStart="@dimen/_100sdp"
         app:boxCornerRadiusTopEnd="@dimen/_100sdp"
         android:layout_marginStart="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_32sdp"
         android:ems="10"
 
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_32sdp"
         app:boxCornerRadiusBottomEnd="@dimen/_100sdp"
         app:boxCornerRadiusTopStart="@dimen/_100sdp"
@@ -102,7 +102,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_32sdp"
         android:ems="10"
 
@@ -115,7 +115,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#c3e6fc"
+            android:background="@drawable/rounded_for_date_time"
             android:focusable="false"
             android:hint="@string/Date" />
 
@@ -127,7 +127,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_32sdp"
         android:ems="10"
 
@@ -141,9 +141,9 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#c3e6fc"
             android:focusable="false"
-            android:hint="@string/Time" />
+            android:hint="@string/Time"
+            android:background="@drawable/rounded_for_date_time"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -157,20 +157,21 @@
         android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_32sdp"
         android:layout_marginRight="@dimen/_32sdp"
-        android:layout_marginBottom="@dimen/_32sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:background="@drawable/rounded_border"
         android:text="@string/Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_Date2"
-        app:layout_constraintVertical_bias="0.863" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Switch
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -179,10 +180,11 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ed_Date2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="118dp"
+        android:layout_height="63dp"
         android:layout_marginStart="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginLeft="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_32sdp"
         android:ems="10"
         android:hint="date"
@@ -195,7 +197,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#c3e6fc"
+            android:background="@drawable/rounded_for_date_time"
             android:focusable="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -206,7 +208,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_80sdp"
-        android:layout_marginTop="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_35sdp"
         android:ems="10"
         android:hint="time"
@@ -222,7 +224,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#c3e6fc"
+            android:background="@drawable/rounded_for_date_time"
             android:focusable="false" />
 
     </com.google.android.material.textfield.TextInputLayout>
