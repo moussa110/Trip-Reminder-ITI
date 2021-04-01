@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightBlue"
     tools:context=".ui.add_trip.AddTripActivity">
+
     <View
         android:id="@+id/view2"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_width="967dp"
+        android:layout_height="159dp"
         android:background="@drawable/wave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,12 +19,11 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ed_name"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginLeft="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-
+        android:layout_width="293dp"
+        android:layout_height="68dp"
+        android:layout_marginStart="@dimen/_32sdp"
+        android:layout_marginLeft="@dimen/_32sdp"
+        android:layout_marginTop="4dp"
         app:boxCornerRadiusBottomEnd="@dimen/_100sdp"
         app:boxCornerRadiusBottomStart="@dimen/_100sdp"
         app:boxCornerRadiusTopEnd="@dimen/_100sdp"
@@ -31,196 +32,178 @@
         app:layout_constraintTop_toBottomOf="@+id/view2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_45sdp"
+            android:layout_width="287dp"
+            android:layout_height="wrap_content"
             android:hint="@string/Trip" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ed_startPoint"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginStart="@dimen/_8sdp"
-
-        android:layout_marginLeft="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_width="297dp"
+        android:layout_height="62dp"
+        android:layout_marginStart="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_32sdp"
         android:ems="10"
         android:inputType="textPersonName"
         app:boxCornerRadiusBottomEnd="@dimen/_100sdp"
         app:boxCornerRadiusBottomStart="@dimen/_100sdp"
         app:boxCornerRadiusTopEnd="@dimen/_100sdp"
+
         app:boxCornerRadiusTopStart="@dimen/_100sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_name">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="@dimen/_200sdp"
+            android:layout_width="293dp"
             android:layout_height="wrap_content"
             android:focusable="false"
             android:hint="@string/Start" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ed_endPoint"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginLeft="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_width="302dp"
+        android:layout_height="69dp"
+        android:layout_marginStart="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:ems="10"
         android:inputType="textPersonName"
         app:boxCornerRadiusBottomEnd="@dimen/_100sdp"
         app:boxCornerRadiusBottomStart="@dimen/_100sdp"
-
         app:boxCornerRadiusTopEnd="@dimen/_100sdp"
+
         app:boxCornerRadiusTopStart="@dimen/_100sdp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_startPoint">
+        app:layout_constraintTop_toBottomOf="@+id/ed_startPoint"
+        android:layout_marginLeft="@dimen/_32sdp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp"
+            android:layout_width="317dp"
+            android:layout_height="52dp"
             android:focusable="false"
             android:hint="@string/End" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ed_Date"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_width="207dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="68dp"
 
-        android:layout_marginLeft="@dimen/_24sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginLeft="68dp"
         android:ems="10"
         android:inputType="date"
         android:paddingRight="@dimen/_8sdp"
         app:layout_constraintStart_toEndOf="@+id/ed_name"
-        app:layout_constraintTop_toBottomOf="@+id/view2">
+        tools:layout_editor_absoluteY="148dp">
+
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEditText3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#c3e6fc"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_for_date_time"
             android:focusable="false"
             android:hint="@string/Date" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ed_Time"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginLeft="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_width="195dp"
+        android:layout_height="56dp"
         android:ems="10"
+
         android:inputType="time"
         android:paddingLeft="@dimen/_8sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toEndOf="@id/ed_Date"
-        app:layout_constraintTop_toBottomOf="@+id/view2">
-
-        <com.google.android.material.textfield.TextInputEditText
-
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:background="#c3e6fc"
-            android:focusable="false"
-            android:hint="@string/Time" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_24sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ed_startPoint"
-        app:layout_constraintTop_toBottomOf="@+id/ed_Date"
-        tools:ignore="MissingConstraints" />
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ed_Date2"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_marginStart="52dp"
-
-        android:layout_marginLeft="52dp"
-        android:layout_marginTop="164dp"
-        android:ems="10"
-        android:inputType="date"
-        android:paddingRight="@dimen/_8sdp"
-        app:layout_constraintStart_toEndOf="@+id/ed_endPoint"
-        app:layout_constraintTop_toBottomOf="@+id/view2">
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/textInputEditText"
-        android:layout_width="@dimen/_120sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_marginStart="52dp"
-        android:layout_marginLeft="52dp"
-        android:layout_marginTop="164dp"
-        android:background="#c3e6fc"
-        android:focusable="false"
-        android:hint="@string/Date"
-        app:layout_constraintStart_toEndOf="@+id/ed_name"
-        app:layout_constraintTop_toBottomOf="@+id/view2"
-        tools:ignore="DuplicateIds" >
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#c3e6fc"
-            android:focusable="false" />
-    </com.google.android.material.textfield.TextInputEditText>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ed_Time2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_80sdp"
-        android:layout_marginTop="@dimen/_24sdp"
-        android:layout_marginEnd="@dimen/_35sdp"
-        android:ems="10"
-        android:hint="time"
-        android:inputType="time"
-        android:paddingLeft="@dimen/_8sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ed_Date2"
-        app:layout_constraintTop_toBottomOf="@+id/switch1"
-        android:layout_marginRight="@dimen/_100sdp"
-        android:layout_marginLeft="@dimen/_32sdp">
-
-        <com.google.android.material.textfield.TextInputEditText
-
-            android:layout_width="103dp"
-            android:layout_height="66dp"
-            android:background="#c3e6fc"
-            android:focusable="false" />
+        tools:layout_editor_absoluteX="725dp"
+        tools:layout_editor_absoluteY="148dp">
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/add_new_trip_btn"
-        android:layout_width="208dp"
-        android:layout_height="39dp"
+        android:layout_width="@dimen/_235sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginStart="@dimen/_32sdp"
+        android:layout_marginLeft="@dimen/_32sdp"
+        android:layout_marginEnd="@dimen/_32sdp"
+        android:layout_marginRight="@dimen/_32sdp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_border"
         android:text="@string/Add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.577"
+        app:layout_constraintHorizontal_bias="0.851"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.713"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_Date2"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/ed_Date"
         tools:ignore="MissingConstraints" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ed_Date2"
+        android:layout_width="206dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="59dp"
+        android:ems="10"
+        android:hint="date"
+        android:inputType="date"
+        android:paddingRight="@dimen/_8sdp"
+        app:layout_constraintTop_toBottomOf="@+id/ed_Date"
+        tools:layout_editor_absoluteX="404dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:background="@drawable/rounded_for_date_time"
+            android:focusable="false" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ed_Time2"
+        android:layout_width="189dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="time"
+        android:inputType="time"
+        android:paddingLeft="@dimen/_8sdp"
+        app:layout_constraintTop_toBottomOf="@+id/textInputEditText4"
+        tools:layout_editor_absoluteX="752dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+
+            android:layout_width="170dp"
+            android:layout_height="85dp"
+            android:background="@drawable/rounded_for_date_time"
+            android:focusable="false" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputEditText
+
+        android:id="@+id/textInputEditText4"
+        android:layout_width="207dp"
+        android:layout_height="87dp"
+        android:background="@drawable/rounded_for_date_time"
+        android:focusable="false"
+        android:hint="@string/Time"
+        tools:layout_editor_absoluteX="713dp"
+        tools:layout_editor_absoluteY="134dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
