@@ -3,6 +3,7 @@ package com.example.tripreminderapp.ui.upcoming_trips;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,10 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tripreminderapp.FloatWidgetService;
+import com.example.tripreminderapp.LoginActivity;
 import com.example.tripreminderapp.R;
 import com.example.tripreminderapp.database.FirebaseHandler;
 import com.example.tripreminderapp.database.TripDatabase;
@@ -27,12 +30,14 @@ import com.example.tripreminderapp.ui.add_trip.AddTripActivity;
 import com.example.tripreminderapp.ui.trip_details.TripDetailsActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class UpcomingTripsFragment extends Fragment {
+    public static boolean FLAG_START=false;
     private FragmentUpcomingBinding binding;
     public static final String UPCOMING_DETAILS_EXTRA = "UPCOMING_DETAILS_EXTRA";
     private final UpcomingTripAdapter upcomingTripAdapter = new UpcomingTripAdapter();
@@ -48,26 +53,40 @@ public class UpcomingTripsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         tripsViewModel.getTripsFromDatabase();
+        trips = TripDatabase.getInstance(getActivity()).tripDao().getAll(LoginActivity.EMAIL);
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentUpcomingBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         tripsViewModel = new ViewModelProvider(this).get(UpcomingTripsViewModel.class);
-        Toast.makeText(getActivity(), ""+ auth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
         binding.homeRvTrips.setAdapter(upcomingTripAdapter);
+        trips = TripDatabase.getInstance(getActivity()).tripDao().getAll(LoginActivity.EMAIL);
         tripsViewModel.getTripsListLiveData().observe(getViewLifecycleOwner(), trips -> {
             upcomingTripAdapter.changeData(trips);
         });
 
-        List<Trip> tripss =TripDatabase.getInstance(getActivity()).tripDao().getAll(auth.getCurrentUser().getEmail());
-        if (tripss.size()==0){
-            FirebaseHandler handler = new FirebaseHandler(getActivity());
-            handler.getTripsByEmail();
-        }
 
+        if (isFirstStartAfterLogin())
+        {
+            if (trips.size()==0) {
+                SharedPreferences.Editor editor=getActivity().getSharedPreferences("start",MODE_PRIVATE).edit();
+                editor.putBoolean("start",false);
+                editor.commit();
+
+                FirebaseHandler handler = new FirebaseHandler(getActivity());
+                handler.getTripsByEmail();
+                handler.onReceiveDataFroFirebase = new FirebaseHandler.OnReceiveDataFroFirebase() {
+                    @Override
+                    public void onReceive(Trip trip) {
+                        tripsViewModel.insertInDatabase(trip);
+                    }
+                };
+            }
+        }
 
         upcomingTripAdapter.setAddNoteClickListener = new UpcomingTripAdapter.AddNoteClickListener() {
             @Override
@@ -93,8 +112,7 @@ public class UpcomingTripsFragment extends Fragment {
         });
 
 
-        //Mido
-        //button to start trip
+
         upcomingTripAdapter.setStartTrip =new UpcomingTripAdapter.StartTrip() {
             @Override
             public void onClick(Trip trip) {
@@ -121,11 +139,6 @@ public class UpcomingTripsFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
 
     public void showAddNoteDialog(int id) {
         LayoutInflater factory = LayoutInflater.from(getActivity());
@@ -187,7 +200,6 @@ public class UpcomingTripsFragment extends Fragment {
                 DisplayTrack(trip.getEndPoint());
                 trip.setDone(true);
                 tripsViewModel.updateTrip(trip);
-
                 addToHistory.dismiss();
             }
         });
@@ -211,6 +223,12 @@ public class UpcomingTripsFragment extends Fragment {
         deletTripDialog.show();
 
 
+    }
+
+    public boolean isFirstStartAfterLogin(){
+        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("start",MODE_PRIVATE);
+        boolean result=sharedPreferences.getBoolean("start",true);
+        return result;
     }
 
 

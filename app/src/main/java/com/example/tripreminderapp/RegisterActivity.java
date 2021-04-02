@@ -54,6 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
                                     Toast.makeText(RegisterActivity.this, "Account Created Successfully",
                                             Toast.LENGTH_LONG).show();
+                                    LoginActivity.EMAIL = email;
                                     startActivity(new Intent(RegisterActivity.this,HomeActivity.class));
 
                                 } else {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tripreminderapp.LoginActivity;
 import com.example.tripreminderapp.R;
 import com.example.tripreminderapp.database.TripDatabase;
 import com.example.tripreminderapp.database.trip.Trip;
@@ -44,8 +45,8 @@ public  class MapActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         tripDatabase = TripDatabase.getInstance(getApplication());
-        tripDatabase.tripDao().getTripDone(auth.getCurrentUser().getEmail());
-        trips = tripDatabase.tripDao().getTripDone(auth.getCurrentUser().getEmail());
+        tripDatabase.tripDao().getTripDone(LoginActivity.EMAIL);
+        trips = tripDatabase.tripDao().getTripDone(LoginActivity.EMAIL);
         for(Trip list:trips){
                 Slangtude = list.getStartLongitude();
                 Slatitude = list.getStartLatitude();

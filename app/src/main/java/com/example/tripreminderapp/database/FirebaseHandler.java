@@ -1,6 +1,7 @@
 package com.example.tripreminderapp.database;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,10 +20,12 @@ import java.util.List;
 public class FirebaseHandler {
     private Context context;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
+    public OnReceiveDataFroFirebase onReceiveDataFroFirebase;
     String email = auth.getCurrentUser().getEmail();
     private String userEmail = email.replace('.','%');
     public FirebaseHandler(Context context) {
         this.context=context;
+
 //        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //        if (user != null) {
 //            userEmail = user.getEmail();
@@ -30,8 +33,6 @@ public class FirebaseHandler {
     }
 
     public void getTripsByEmail() {
-
-       // @RequiresApi(api = Build.VERSION_CODES.N) List<Trip> ssss(){ List<Trip>tripList = new ArrayList<>(); FirebaseDatabase.getInstance().getReference().child("trips").get().addOnCompleteListener(task -> { DataSnapshot result = task.getResult(); Iterable<DataSnapshot> children = result.getChildren(); children.forEach(dataSnapshot -> { Trip value = dataSnapshot.getValue(Trip.class); tripList.add(value); }); }); return tripList; }
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("trips").child(userEmail);
         // calling add value event listener method
@@ -43,8 +44,10 @@ public class FirebaseHandler {
                 // our data base and after adding new child
                 // we are adding that item inside our array list and
                 // notifying our adapter that the data in adapter is changed.
-                Trip trip = snapshot.getValue(Trip.class);
-                TripDatabase.getInstance(context).tripDao().insertTrip(trip);
+
+                    Trip trip = snapshot.getValue(Trip.class);
+                Log.e("TAGss", "onChildAdded: "+trip.getId() );
+                    onReceiveDataFroFirebase.onReceive(trip);
             }
 
             @Override
@@ -79,10 +82,9 @@ public class FirebaseHandler {
     }
     public void syncDataWithFirebaseDatabase() {
         deleteAllData();
-        Toast.makeText(context, userEmail, Toast.LENGTH_SHORT).show();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference = firebaseDatabase.getReference();
-        List<Trip> tripList = TripDatabase.getInstance(context).tripDao().getAllf(email);
+        List<Trip> tripList = TripDatabase.getInstance(context).tripDao().getAll(email);
         for (int indx = 0; indx < tripList.size(); ++indx) {
             Trip trip = tripList.get(indx);
             reference.child("trips").child(userEmail).push().setValue(trip).addOnCompleteListener(task -> {
@@ -91,7 +93,11 @@ public class FirebaseHandler {
         }
     }
     public void deleteAllData(){
-        DatabaseReference mPostReference = FirebaseDatabase.getInstance().getReference("trips");
+        DatabaseReference mPostReference = FirebaseDatabase.getInstance().getReference("trips").child(userEmail);
         mPostReference.removeValue();
+    }
+
+    public interface OnReceiveDataFroFirebase{
+         void onReceive(Trip trip);
     }
 }

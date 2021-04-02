@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.tripreminderapp.LoginActivity;
 import com.example.tripreminderapp.database.TripDatabase;
 import com.example.tripreminderapp.database.note.Note;
 import com.example.tripreminderapp.database.trip.Trip;
@@ -29,7 +30,7 @@ public class HistoryViewModel extends AndroidViewModel {
 
 
      void getTripsFromDatabase() {
-        tripsListLiveData.setValue(database.tripDao().getTripDone(auth.getCurrentUser().getEmail()));
+        tripsListLiveData.setValue(database.tripDao().getTripDone(LoginActivity.EMAIL));
     }
 
     public  void deleteTrip(Trip trip){

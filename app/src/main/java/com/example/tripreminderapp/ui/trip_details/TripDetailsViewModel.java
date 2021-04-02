@@ -18,7 +18,12 @@ public class TripDetailsViewModel extends AndroidViewModel {
     }
     private final TripDatabase database =TripDatabase.getInstance(getApplication());
     private MutableLiveData<List<Note>> notesLiveData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> doneLiveData = new MutableLiveData<>();
     private MutableLiveData<Boolean> isEditable = new MutableLiveData<>(false);
+
+    public MutableLiveData<Boolean> getDoneLiveData() {
+        return doneLiveData;
+    }
 
     public void getNotesFromDatabase(int id){
         notesLiveData.setValue(database.noteDao().getNotes(id));
@@ -37,7 +42,10 @@ public class TripDetailsViewModel extends AndroidViewModel {
            isEditable.setValue(true);
        }
        }
-
+    public void updateTriptoDone(Trip trip){
+        database.tripDao().update(trip);
+        doneLiveData.setValue(true);
+    }
     public MutableLiveData<List<Note>> getNotesLiveData() {
         return notesLiveData;
     }

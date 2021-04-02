@@ -5,11 +5,13 @@
     android:id="@+id/constraintlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightBlueTransparent"
     tools:context=".ui.profile.ProfileFragment" >
-    <View
+
+  <View
         android:id="@+id/topView"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_height="@dimen/_90sdp"
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -18,7 +20,7 @@
   <View
       android:id="@+id/view2"
       android:layout_width="0dp"
-      android:layout_height="@dimen/_100sdp"
+      android:layout_height="@dimen/_90sdp"
       android:background="@drawable/wave"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -27,23 +29,23 @@
 
   <de.hdodenhof.circleimageview.CircleImageView
       android:id="@+id/imageView5"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+      android:layout_width="@dimen/_120sdp"
+      android:layout_height="@dimen/_120sdp"
       android:layout_marginStart="@dimen/_32sdp"
       android:layout_marginLeft="@dimen/_32sdp"
-      android:layout_marginTop="@dimen/_24sdp"
+      android:layout_marginTop="@dimen/_18sdp"
       android:layout_marginEnd="@dimen/_32sdp"
       android:layout_marginRight="@dimen/_32sdp"
       android:background="@drawable/ic_user"
       app:layout_constraintEnd_toEndOf="@+id/topView"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      tools:src="@tools:sample/avatars" />
+      app:layout_constraintTop_toTopOf="parent" />
 
   <TextView
       android:id="@+id/profile_tv_email"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/_8sdp"
       android:drawableStart="@drawable/ic_email"
       android:drawableLeft="@drawable/ic_email"
       android:drawablePadding="@dimen/_10sdp"
@@ -54,7 +56,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.115"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/view2"
+      app:layout_constraintTop_toBottomOf="@+id/profile_tv_name"
       tools:text="moussam760@gmail.com" />
 
 
@@ -131,41 +133,60 @@
 
   <Button
       android:id="@+id/profile_btn_sync"
-      android:layout_width="137dp"
-      android:layout_height="58dp"
-      android:layout_marginTop="56dp"
-      android:background="@drawable/rounded_border"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/_32sdp"
+      android:layout_marginTop="@dimen/_16sdp"
+      android:layout_marginEnd="@dimen/_32sdp"
+      android:drawableLeft="@drawable/ic_cloud_sync"
       android:drawablePadding="@dimen/_10sdp"
       android:gravity="center"
       android:padding="@dimen/_8sdp"
       android:text="@string/sync"
-      android:textColor="@color/black"
+      android:textColor="@color/white"
       android:textSize="@dimen/_14ssp"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toStartOf="@+id/profile_btn_log_out"
-      app:layout_constraintHorizontal_bias="0.573"
+      app:backgroundTint="#A9DBFA"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/profile_tv_cancel_count"
-      app:layout_constraintVertical_bias="0.0" />
+      app:layout_constraintTop_toBottomOf="@id/profile_tv_cancel_count" />
 
   <Button
       android:id="@+id/profile_btn_log_out"
-      android:layout_width="137dp"
-      android:layout_height="58dp"
-      android:layout_marginTop="56dp"
-      android:layout_marginEnd="40dp"
-      android:layout_marginRight="40dp"
-      android:background="@drawable/rounded_border"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/_32sdp"
+      android:layout_marginTop="@dimen/_12sdp"
+      android:layout_marginEnd="@dimen/_32sdp"
+      android:drawableLeft="@drawable/ic_logout"
       android:drawablePadding="@dimen/_10sdp"
       android:gravity="center"
       android:padding="@dimen/_8sdp"
-      android:text="@string/Logout"
-      android:textColor="@color/black"
+      android:text="@string/logout"
+      android:textColor="@color/white"
       android:textSize="@dimen/_14ssp"
-      app:layout_constraintBottom_toBottomOf="parent"
+      app:backgroundTint="@color/red"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/profile_tv_cancel_count"
-      app:layout_constraintVertical_bias="0.0" />
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/profile_btn_sync" />
+
+  <TextView
+      android:id="@+id/profile_tv_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/_22sdp"
+      android:padding="@dimen/_8sdp"
+      android:drawableStart="@drawable/ic_baseline_person_24"
+      android:drawablePadding="@dimen/_8sdp"
+      android:fontFamily="casual"
+      android:text="user name"
+      android:textColor="@color/red"
+      android:textSize="24sp"
+      android:textStyle="bold"
+      android:typeface="sans"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/imageView5"
+      android:drawableLeft="@drawable/ic_baseline_person_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

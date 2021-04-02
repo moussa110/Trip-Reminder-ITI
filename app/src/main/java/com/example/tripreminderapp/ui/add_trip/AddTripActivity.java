@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.tripreminderapp.LoginActivity;
 import com.example.tripreminderapp.R;
 import com.example.tripreminderapp.database.trip.Trip;
 import com.example.tripreminderapp.databinding.ActivityAddTripBinding;
@@ -123,7 +124,7 @@ public class AddTripActivity extends AppCompatActivity {
                 trip.setName(binding.edName.getEditText().getText().toString());
                 trip.setStartPoint(binding.edStartPoint.getEditText().getText().toString());
                 trip.setEndPoint(binding.edEndPoint.getEditText().getText().toString());
-                trip.setEmail(auth.getCurrentUser().getEmail());
+                trip.setEmail(LoginActivity.EMAIL);
                 trip.setDate(binding.edDate.getText().toString());
                 trip.setTime(binding.edTime.getText().toString());
                 trip.setDate_time(binding.edDate.getText().toString()+" "+binding.edTime.getText().toString());

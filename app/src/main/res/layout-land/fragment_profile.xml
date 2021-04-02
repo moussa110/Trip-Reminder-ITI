@@ -5,106 +5,170 @@
     android:id="@+id/constraintlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.profile.ProfileFragment" >
+    android:background="@color/lightBlueTransparent"
+    tools:context=".ui.profile.ProfileFragment">
+
     <View
-        android:id="@+id/topView"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_100sdp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/topView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80sdp"
+        android:background="@color/colorPrimary" />
+
     <View
         android:id="@+id/view2"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_width="731dp"
+        android:layout_height="@dimen/_80sdp"
         android:background="@drawable/wave"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="130dp" />
 
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_32sdp"
-        android:layout_marginLeft="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_24sdp"
-        android:layout_marginEnd="@dimen/_32sdp"
-        android:layout_marginRight="@dimen/_32sdp"
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp"
         android:background="@drawable/ic_user"
-        app:layout_constraintEnd_toEndOf="@+id/topView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <TextView
         android:id="@+id/profile_tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center"
+        android:drawableStart="@drawable/ic_email"
+        android:drawableLeft="@drawable/ic_email"
         android:drawablePadding="@dimen/_10sdp"
+        android:gravity="center"
+        android:padding="@dimen/_8sdp"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
-        android:padding="@dimen/_8sdp"
-        android:drawableStart="@drawable/ic_email"
-        tools:text="moussam760@gmail.com"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2"
-        android:drawableLeft="@drawable/ic_email" />
+        tools:text="moussam760@gmail.com" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:drawableStart="@drawable/ic_next"
+        android:drawableLeft="@drawable/ic_email"
+        android:drawablePadding="@dimen/_10sdp"
+        android:gravity="left"
+        android:padding="@dimen/_8sdp"
+        android:text="@string/Trip_done"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toStartOf="@+id/profile_tv_done_count"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <TextView
         android:id="@+id/profile_tv_done_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center"
         android:drawablePadding="@dimen/_10sdp"
+        android:gravity="left"
+        android:padding="@dimen/_8sdp"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
-        android:padding="@dimen/_8sdp"
-        android:drawableStart="@drawable/ic_email"
-        tools:text="0"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_tv_email"
-        android:drawableLeft="@drawable/ic_email" />
+        app:layout_constraintTop_toBottomOf="@+id/view2"
+        tools:text="0" />
+
     <TextView
         android:id="@+id/profile_tv_cancel_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center"
+        android:layout_marginTop="32dp"
         android:drawablePadding="@dimen/_10sdp"
+        android:gravity="center"
+        android:padding="@dimen/_8sdp"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
-        android:padding="@dimen/_8sdp"
-        android:drawableStart="@drawable/ic_email"
-        tools:text="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_tv_done_count"
-        android:drawableLeft="@drawable/ic_email" />
-    <Button
-        android:id="@+id/profile_btn_sync"
+        tools:text="0" />
+
+    <TextView
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center"
-        android:text="@string/logout"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:drawableStart="@drawable/ic_back"
+        android:drawableLeft="@drawable/ic_back"
         android:drawablePadding="@dimen/_10sdp"
+        android:gravity="center"
+        android:padding="@dimen/_8sdp"
+        android:text="@string/Trip_cancel"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_tv_cancel_count"
+        app:layout_constraintEnd_toStartOf="@+id/profile_tv_cancel_count"
+        app:layout_constraintTop_toTopOf="@+id/profile_tv_cancel_count" />
+
+
+    <Button
+        android:id="@+id/profile_btn_sync"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_22sdp"
+        android:drawableLeft="@drawable/ic_cloud_sync"
+        android:drawablePadding="@dimen/_10sdp"
+        android:gravity="center"
         android:padding="@dimen/_8sdp"
-        android:drawableStart="@drawable/ic_email"
-        tools:text="moussam760@gmail.com"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/sync"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp"
+        app:backgroundTint="#A9DBFA"
+        app:layout_constraintEnd_toEndOf="@+id/profile_tv_email"
+        app:layout_constraintStart_toStartOf="@+id/profile_tv_email"
+        app:layout_constraintTop_toBottomOf="@+id/profile_tv_email" />
+
+    <Button
+        android:id="@+id/profile_btn_log_out"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_logout"
+        android:drawablePadding="@dimen/_10sdp"
+        android:gravity="center"
+        android:padding="@dimen/_8sdp"
+        android:text="@string/logout"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp"
+        app:backgroundTint="@color/red"
+        app:layout_constraintEnd_toEndOf="@+id/profile_btn_sync"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_tv_cancel_count"
-        android:drawableLeft="@drawable/ic_email" />
+        app:layout_constraintTop_toBottomOf="@+id/profile_btn_sync" />
+
+    <TextView
+        android:id="@+id/profile_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:drawablePadding="@dimen/_8sdp"
+        android:fontFamily="casual"
+        android:padding="@dimen/_8sdp"
+        android:text="user name"
+        android:textColor="@color/red"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:typeface="sans"
+        app:layout_constraintEnd_toEndOf="@+id/topView"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

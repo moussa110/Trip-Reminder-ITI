@@ -14,13 +14,18 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import androidx.core.app.NotificationCompat;
 
 import com.example.tripreminderapp.HomeActivity;
+import com.example.tripreminderapp.LoginActivity;
 import com.example.tripreminderapp.R;
+import com.example.tripreminderapp.database.TripDatabase;
+import com.example.tripreminderapp.database.trip.Trip;
 import com.example.tripreminderapp.ui.trip_details.TripDetailsActivity;
+import com.example.tripreminderapp.ui.upcoming_trips.UpcomingTripsFragment;
 
 import java.io.IOException;
 
@@ -51,18 +56,17 @@ public class MyService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 //
-//        String date_time =intent.getStringExtra("date_time");
-//        List<Trip> trips= TripDatabase.getInstance(getApplicationContext()).tripDao().getTrip(date_time);
-//        Trip trip = trips.get(0);
-
+        String date_time =intent.getStringExtra("date_time");
+        Log.e("sasasasas", "onStartCommand: "+date_time );
+        Trip trip = TripDatabase.getInstance(getApplicationContext()).tripDao().getTripsByDateTime(date_time, LoginActivity.EMAIL).get(0);
         RemoteViews customView =new RemoteViews(getPackageName(), R.layout.notification_reminder);
         Intent notificationIntent =new Intent(getApplicationContext(), HomeActivity.class);
         Intent hungupIntent =new Intent(getApplicationContext(), MyReceiver.class);
         Intent answerIntent = new Intent(this, TripDetailsActivity.class);
-        //answerIntent.putExtra(UpcomingTripsFragment.UPCOMING_DETAILS_EXTRA,trip);
+        answerIntent.putExtra(UpcomingTripsFragment.UPCOMING_DETAILS_EXTRA,trip);
 
-        customView.setTextViewText(R.id.tripEndPoint, "end");
-        customView.setTextViewText(R.id.tripName, "name");
+        customView.setTextViewText(R.id.tripEndPoint, trip.getEndPoint());
+        customView.setTextViewText(R.id.tripName, trip.getName());
         //customView.setImageViewBitmap(R.id.photo, NotificationImageManager().getImageBitmap(intent.getStringExtra("user_thumbnail_image")))
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);

@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import com.example.tripreminderapp.database.TripDatabase;
+import com.example.tripreminderapp.database.trip.Trip;
+
 public class MyWorker extends Worker {
     private Context context;
 
@@ -21,9 +24,8 @@ public class MyWorker extends Worker {
     @Override
     public Result doWork() {
         String date_time = getInputData().getString("data");
-
         Intent intent1 = new Intent(context,MyService.class);
-        //intent1.putExtra("date_time",intent.getStringExtra("date_time"));
+        intent1.putExtra("date_time",date_time);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(intent1);

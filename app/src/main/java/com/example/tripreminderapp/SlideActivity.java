@@ -31,7 +31,6 @@ public class SlideActivity extends AppCompatActivity {
             editor.putBoolean("slide",true);
             editor.commit();
         }
-
     }
 
     private boolean isOpenAlread() {

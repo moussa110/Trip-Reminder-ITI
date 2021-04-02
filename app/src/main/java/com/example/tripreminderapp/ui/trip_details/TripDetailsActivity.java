@@ -3,14 +3,19 @@ package com.example.tripreminderapp.ui.trip_details;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -21,11 +26,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tripreminderapp.FloatWidgetService;
 import com.example.tripreminderapp.R;
 import com.example.tripreminderapp.database.TripDatabase;
 import com.example.tripreminderapp.database.note.Note;
 import com.example.tripreminderapp.database.trip.Trip;
 import com.example.tripreminderapp.databinding.ActivityTripDetailsBinding;
+import com.example.tripreminderapp.reminder.MyService;
+import com.example.tripreminderapp.ui.upcoming_trips.UpcomingTripAdapter;
 import com.example.tripreminderapp.ui.upcoming_trips.UpcomingTripsFragment;
 import com.google.android.gms.common.api.Status;
 import com.google.android.libraries.places.api.Places;
@@ -35,6 +43,7 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -67,16 +76,36 @@ public class TripDetailsActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(TripDetailsViewModel.class);
         getSupportActionBar().hide();
 
+        Intent intent2 = new Intent(this, MyService.class);
+        stopService(intent2);
+
         changeBehaviour(false);
 
         Places.initialize(getApplicationContext(), getString(R.string.api_places_key));
         List<Place.Field> fieldList = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME);
         Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fieldList).build(this);
 
+        viewModel.getDoneLiveData().observe(this,aBoolean -> {
+            if (aBoolean){
+                Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
+            }
+        });
         binding.edStartPoint.getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(intent, REQ_CODE);
+            }
+        });
+        binding.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    currentTrip.setDone(true);
+                    viewModel.updateTriptoDone(currentTrip);
+                }else {
+                    currentTrip.setDone(false);
+                    viewModel.updateTriptoDone(currentTrip);
+                }
             }
         });
         binding.edEndPoint.getEditText().setOnClickListener(new View.OnClickListener() {
@@ -87,6 +116,25 @@ public class TripDetailsActivity extends AppCompatActivity {
         });
 
 
+        binding.imageView11.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(getBaseContext())) {
+                            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                    Uri.parse("package:" + getBaseContext().getPackageName()));
+                            startActivityForResult(intent, 106);
+                        } else {
+                            Intent startIntent = new Intent(getBaseContext(), FloatWidgetService.class);
+                            startIntent.putExtra("notes", (ArrayList<Note>) TripDatabase.getInstance(getBaseContext()).noteDao().getNotes(currentTrip.getId()));
+                            getBaseContext().startService(startIntent);
+                        };
+                        displayTrack(currentTrip.getEndPoint());
+                        currentTrip.setDone(true);
+                        viewModel.updateTriptoDone(currentTrip);
+                        finish();
+                    }
+                });
 
         currentTrip = (Trip) getIntent().getSerializableExtra(UpcomingTripsFragment.UPCOMING_DETAILS_EXTRA);
         binding.edName.getEditText().setText(currentTrip.getName());
@@ -220,8 +268,34 @@ public class TripDetailsActivity extends AppCompatActivity {
             Place place = Autocomplete.getPlaceFromIntent(data);
             binding.edEndPoint.getEditText().setText(place.getAddress());
         } else {
-            Status status = Autocomplete.getStatusFromIntent(data);
-            Toast.makeText(this, "error  " + status.getStatusMessage(), Toast.LENGTH_SHORT).show();
+            //Status status = Autocomplete.getStatusFromIntent(data);
+            Toast.makeText(this, "error  ", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void displayTrack( String sDestination) {
+        //if device dosnt have mape installed then redirect it to play store
+
+        try {
+            //when google map installed
+            Uri uri = Uri.parse("https://www.google.co.in/maps/dir/" + "/" + sDestination);
+
+            //Action view with uri
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.setPackage("com.google.android.apps.maps");
+            //set flag
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            startActivity(intent);
+
+
+        } catch (ActivityNotFoundException e) {
+            //when google map is not initialize
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps.maps");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            //set flag
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            startActivity(intent);
         }
     }
 

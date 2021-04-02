@@ -47,6 +47,8 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "test";
     private ActivityLoginBinding binding;
 
+    public static String EMAIL="";
+
 
 
     @Override
@@ -105,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                            EMAIL = email;
                         } else {
                             Log.w(TAG, "", task.getException());
                             Toast.makeText(LoginActivity.this, "couldn't LOGIN", Toast.LENGTH_LONG).show();
@@ -159,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 // Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
-
+                EMAIL =account.getEmail();
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 Toast.makeText(this, "Register with google success", Toast.LENGTH_SHORT).show();
             } catch (ApiException e) {
