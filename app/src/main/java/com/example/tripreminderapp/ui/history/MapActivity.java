@@ -42,7 +42,7 @@ public  class MapActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getSupportActionBar().hide();
         tripDatabase = TripDatabase.getInstance(getApplication());
         tripDatabase.tripDao().getTripDone(auth.getCurrentUser().getEmail());
         trips = tripDatabase.tripDao().getTripDone(auth.getCurrentUser().getEmail());

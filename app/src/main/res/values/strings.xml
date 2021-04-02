@@ -49,7 +49,7 @@
     <string name="Time">Time</string>
     <string name="Edit">Edit</string>
     <string name="Notes">Notes</string>
-    <string name="delete_trip">Do You Want To Delete This Trip?</string>
+    <string name="delete_trip">Do You Want To Cancel This Trip?</string>
     <string name="ok">ok</string>
     <string name="go">Do you want to go to this trip now?</string>
 
@@ -64,4 +64,9 @@
     <string name="cancel">cancel</string>
     <string name="Dismiss">Dismiss</string>
     <string name="Show_Notes">Show Notes</string>
+    <string name="moteConfirm">confirm</string>
+    <string name="noteUpdate">update</string>
+    <string name="OK">OK</string>
+    <string name="delete">Delete</string>
+    <string name="sync">sync</string>
 </resources>

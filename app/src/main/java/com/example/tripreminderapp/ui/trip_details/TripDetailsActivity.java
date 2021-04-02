@@ -42,7 +42,7 @@ import java.util.Locale;
 
 
 
-public class TripDetailsActivity extends AppCompatActivity   implements AdapterView.OnItemSelectedListener, TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener {
+public class TripDetailsActivity extends AppCompatActivity {
 
     private final int REQ_CODE = 2615;
     private NotesAdapter notesAdapter = new NotesAdapter();
@@ -67,11 +67,6 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
         viewModel = ViewModelProviders.of(this).get(TripDetailsViewModel.class);
         getSupportActionBar().hide();
 
-//        spinner = findViewById(R.id.trip_type);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.types, R.layout.spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
-
         changeBehaviour(false);
 
         Places.initialize(getApplicationContext(), getString(R.string.api_places_key));
@@ -92,8 +87,6 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
         });
 
 
-//        notesAdapter = new NotesAdapter();
-//        binding.detailsRvNote.setAdapter(notesAdapter);
 
         currentTrip = (Trip) getIntent().getSerializableExtra(UpcomingTripsFragment.UPCOMING_DETAILS_EXTRA);
         binding.edName.getEditText().setText(currentTrip.getName());
@@ -103,10 +96,7 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
         binding.edTime.setText(currentTrip.getTime());
 
 
-        //spinner.setSelection(((ArrayAdapter<String>)spinner.getAdapter()).getPosition(currentTrip.getType()));
-
-
-        viewModel.getNotesFromDatabase(currentTrip.getId());
+       // viewModel.getNotesFromDatabase(currentTrip.getId());
 
         viewModel.getNotesLiveData().observe(this,notes -> {
             notesAdapter.changeData(notes);
@@ -117,7 +107,6 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
         });
 
         viewModel.getIsEditable().observe(this,aBoolean -> {
-            Toast.makeText(TripDetailsActivity.this, aBoolean+"", Toast.LENGTH_SHORT).show();
                 changeBehaviour(aBoolean);
 
         });
@@ -148,19 +137,6 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
         binding.detailsBtnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             //   String type = getResources().getStringArray(R.array.types)[spinner.getSelectedItemPosition()];
-//                String name = binding.edName.getEditText().getText().toString();
-//                String startPoint = binding.edStartPoint.getEditText().getText().toString();
-//                String endPoint = binding.edEndPoint.getEditText().getText().toString();
-//                String date = binding.edDate.getEditText().getText().toString();
-//                String time = binding.edTime.getEditText().getText().toString();
-//
-//
-//
-//                Trip trip = new Trip(name, startPoint, endPoint, date, time,date+" "+time,type);
-//
-//                viewModel.updateTripInDatabase(trip);
-
                 currentTrip.setName( binding.edName.getEditText().getText().toString());
                 currentTrip.setStartPoint( binding.edStartPoint.getEditText().getText().toString());
                 currentTrip.setEndPoint( binding.edEndPoint.getEditText().getText().toString());
@@ -198,9 +174,7 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
                         String _month = (month+1) < 10 ? "0" + (month+1) : String.valueOf(month+1);
                         String _date = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
                         String _pickedDate = _year + "-" + _month + "-" + _date;
-                        Log.e("PickedDate: ", "Date: " + _pickedDate); //2019-02-12
                         binding.edDate.setText(_pickedDate);
-                        //updateLabel();
                     }
                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.MONTH));
                 dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
@@ -269,8 +243,6 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
         }
     }
 
-
-    //Mido
     private void updateLabel() {
         String myFormat = "MM/dd/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
@@ -279,14 +251,19 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
 
 
     public void showNotesDialog(List<Note> data) {
+        if (data.size()==0)
+            notesDialog.dismiss();
         LayoutInflater factory = LayoutInflater.from(this);
         View view = factory.inflate(R.layout.dialog_show_notes, null);
         notesDialog = new AlertDialog.Builder(this).create();
         notesDialog.setView(view);
+        if (data.size()==0)
+            notesDialog.dismiss();
         RecyclerView recyclerView = view.findViewById(R.id.details_rv_note);
         recyclerView.setAdapter(notesAdapter);
         notesAdapter.changeData(data);
         notesDialog.show();
+
     }
 
 
@@ -304,7 +281,7 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
 
         title.getEditText().setEnabled(false);
         description.getEditText().setEnabled(false);
-        save.setText("update");
+        save.setText(R.string.noteUpdate);
 
 
         save.setOnClickListener(new View.OnClickListener() {
@@ -313,13 +290,15 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
                 if (flag[0] == 0) {
                     title.getEditText().setEnabled(true);
                     description.getEditText().setEnabled(true);
-                    save.setText("confirm");
+                    save.setText(R.string.moteConfirm);
                     flag[0] = 1;
                 }else {
                     note.setTitle(title.getEditText().getText().toString());
                     note.setDescription(description.getEditText().getText().toString());
                     TripDatabase.getInstance(TripDetailsActivity.this).noteDao().update(note);
                     addNoteDialog.dismiss();
+                    notesDialog.dismiss();
+
                 }
 
             }
@@ -327,27 +306,4 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
         addNoteDialog.show();
     }
 
-
-
-
-
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-    }
-
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

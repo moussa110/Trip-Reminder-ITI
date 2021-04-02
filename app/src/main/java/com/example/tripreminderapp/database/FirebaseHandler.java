@@ -18,14 +18,16 @@ import com.google.firebase.database.annotations.Nullable;
 import java.util.List;
 
 public class FirebaseHandler {
-    private String userEmail;
     private Context context;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    String email = auth.getCurrentUser().getEmail();
+    private String userEmail = email.replace('.','%');
     public FirebaseHandler(Context context) {
         this.context=context;
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            userEmail = "mahmoud";
-        }
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user != null) {
+//            userEmail = user.getEmail();
+//        }
     }
 
     public void getTripsByEmail() {
@@ -78,10 +80,10 @@ public class FirebaseHandler {
     }
     public void syncDataWithFirebaseDatabase() {
         deleteAllData();
+        Toast.makeText(context, userEmail, Toast.LENGTH_SHORT).show();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference = firebaseDatabase.getReference();
-        List<Trip> tripList = null;
-        // = TripDatabase.getInstance(context).tripDao().getAll();
+        List<Trip> tripList = TripDatabase.getInstance(context).tripDao().getAllf(email);
         for (int indx = 0; indx < tripList.size(); ++indx) {
             Trip trip = tripList.get(indx);
             reference.child("trips").child(userEmail).push().setValue(trip).addOnCompleteListener(task -> {

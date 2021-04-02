@@ -57,10 +57,15 @@
     <string name="save">حفظ</string>
     <string name="Title">العنوان</string>
     <string name="Description">الشرح</string>
-    <string name="is_round_trip">is round trip?</string>
+    <string name="is_round_trip">ذهاب وعوة ؟</string>
     <string name="Add_notes">اضافه ملاحظات</string>
     <string name="start">ابدء</string>
     <string name="cancel">الغاء</string>
     <string name="Dismiss">اغلاق</string>
     <string name="Show_Notes">اظهار الملاحظات</string>
+    <string name="moteConfirm">موافق</string>
+    <string name="noteUpdate">تعديل</string>
+    <string name="OK">موافق</string>
+    <string name="delete">Delete</string>
+    <string name="sync">sync</string>
 </resources>

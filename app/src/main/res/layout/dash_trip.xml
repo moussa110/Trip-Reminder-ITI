@@ -134,7 +134,7 @@
                 android:background="@drawable/rounded_cancel"
                 android:drawablePadding="@dimen/_10sdp"
                 android:padding="@dimen/_10sdp"
-                android:text="@string/cancel"
+                android:text="@string/delete"
                 android:textStyle="bold"
                 app:backgroundTint="#C65353" />
 

@@ -21,7 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_24sdp"
         android:layout_marginEnd="@dimen/_32sdp"
         android:hint="trip name"
         app:boxCornerRadiusBottomEnd="@dimen/_100sdp"
@@ -36,7 +35,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -161,33 +159,21 @@
         app:layout_constraintStart_toEndOf="@+id/details_btn_edit"
         app:layout_constraintTop_toBottomOf="@+id/edTime" />
 
+
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="0dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginLeft="152dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/chbx_background"
-
+        android:gravity="top"
         android:text="@string/Done"
         android:textSize="@dimen/_18ssp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/details_btn_edit" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="104dp"
-        android:text="TextView"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/_18ssp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
         app:layout_constraintTop_toBottomOf="@+id/details_btn_edit" />
 
     <ImageView
@@ -195,9 +181,9 @@
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="101dp"
-        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_32sdp"
         android:layout_marginRight="@dimen/_16sdp"
-        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_32sdp"
         android:background="@drawable/ic_video_play_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

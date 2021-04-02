@@ -1,6 +1,5 @@
 package com.example.tripreminderapp.ui.history;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tripreminderapp.R;
 import com.example.tripreminderapp.database.trip.Trip;
-import com.example.tripreminderapp.ui.upcoming_trips.UpcomingTripAdapter;
 
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder>{
 
     private List<Trip> data = null;
-
-    public DeletTrip setDeletTrip = null;
+    public OnDeletTripListener setOnDeletTripListener = null;
+    public OnShowNoteListener setOnShowNoteListener = null;
 
     public void changeData(List<Trip> tripsData) {
         this.data = tripsData;
@@ -38,25 +36,36 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         Trip trip = data.get(position);
         holder.nameTv.setText(trip.getName());
-        Log.e("mido","the item is "+ trip.getName());
         holder.startPointTv.setText(trip.getStartPoint());
         holder.endPointTv.setText(trip.getEndPoint());
         holder.dateTv.setText(trip.getDate());
         holder.timeTv.setText(trip.getTime());
+        int status=0;
+        if (trip.isDone())
+            status = R.string.Done;
 
-        if(setDeletTrip != null){
+        if (trip.isCanceled())
+            status= R.string.cancel;
+
+        holder.statusTv.setText(status);
+
+        if(setOnDeletTripListener != null){
             holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    setDeletTrip.onClick(trip);
+                    setOnDeletTripListener.onClick(trip);
                 }
             });
         }
-
-
+        if (setOnShowNoteListener != null){
+            holder.showNotesBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setOnShowNoteListener.onClick(trip);
+                }
+            });
+        }
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -66,9 +75,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             return data.size();
     }
 
-    public interface DeletTrip{
-        void onClick(Trip trip);
-    }
+
 
 
 
@@ -82,8 +89,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         TextView timeTv;
         TextView dateTv;
         TextView statusTv;
-        Button startBtn;
+        Button showNotesBtn;
         Button deleteBtn;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,8 +101,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             dateTv = itemView.findViewById(R.id.item_tv_date);
             timeTv = itemView.findViewById(R.id.item_tv_time);
             statusTv = itemView.findViewById(R.id.item_tv_status);
-            startBtn = itemView.findViewById(R.id.item_btn_start);
-            deleteBtn = itemView.findViewById(R.id.item_btn_cancel);
+            showNotesBtn = itemView.findViewById(R.id.item_btn_add_notes);
+            deleteBtn = itemView.findViewById(R.id.delete_trip);
         }
+    }
+    public interface OnDeletTripListener {
+        void onClick(Trip trip);
+    }
+
+    public interface OnShowNoteListener{
+        void onClick(Trip trip);
     }
 }

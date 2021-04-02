@@ -35,8 +35,9 @@ public class UpcomingTripsViewModel extends AndroidViewModel {
 
 
 
-    private void updateTrip(Trip trip) {
+    public void updateTrip(Trip trip) {
         database.tripDao().update(trip);
+        getTripsFromDatabase();
     }
 
     public MutableLiveData<List<Trip>> getTripsListLiveData() {

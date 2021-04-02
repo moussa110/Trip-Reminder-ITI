@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.tripreminderapp.ui.notifications.NotificationsFragment"
+        android:name="com.example.tripreminderapp.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
 <!--    android:label="@string/title_notifications"-->
 </navigation>

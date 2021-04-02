@@ -1,37 +1,22 @@
 package com.example.tripreminderapp.ui.add_trip;
 
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
-import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.work.Data;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
 
 import com.example.tripreminderapp.R;
-import com.example.tripreminderapp.database.TripDatabase;
 import com.example.tripreminderapp.database.trip.Trip;
 import com.example.tripreminderapp.databinding.ActivityAddTripBinding;
-import com.example.tripreminderapp.reminder.MyService;
-import com.example.tripreminderapp.reminder.MyWorker;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
@@ -39,14 +24,11 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class AddTripActivity extends AppCompatActivity {
 
@@ -54,7 +36,8 @@ public class AddTripActivity extends AppCompatActivity {
     private static final int REQ_CODE = 111;
     private AddTripViewModel viewModel;
     private Trip trip = new Trip();
-    private Calendar mCalendar;
+    private Calendar fCalendar;
+    private Calendar rCalendar;
     private FirebaseAuth auth =FirebaseAuth.getInstance();
 
 
@@ -66,7 +49,8 @@ public class AddTripActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         viewModel = ViewModelProviders.of(this).get(AddTripViewModel.class);
         getSupportActionBar().hide();
-        mCalendar =Calendar.getInstance();
+        fCalendar =Calendar.getInstance();
+        rCalendar =Calendar.getInstance();
 
 
         Places.initialize(getApplicationContext(), getString(R.string.api_places_key));
@@ -97,10 +81,10 @@ public class AddTripActivity extends AppCompatActivity {
                 DatePickerDialog dialog = new DatePickerDialog(AddTripActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        mCalendar.set(Calendar.YEAR , year);
-                        mCalendar.set(Calendar.MONTH , month);
-                        mCalendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
-                        String date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(mCalendar.getTime());
+                        fCalendar.set(Calendar.YEAR , year);
+                        fCalendar.set(Calendar.MONTH , month);
+                        fCalendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
+                        String date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(fCalendar.getTime());
                         binding.edDate.setText(date);
                     }
                 } , c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
@@ -121,9 +105,9 @@ public class AddTripActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(AddTripActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        mCalendar.set(Calendar.MINUTE , selectedMinute);
-                        mCalendar.set(Calendar.HOUR_OF_DAY , selectedHour);
-                        mCalendar.set(Calendar.SECOND , 0);
+                        fCalendar.set(Calendar.MINUTE , selectedMinute);
+                        fCalendar.set(Calendar.HOUR_OF_DAY , selectedHour);
+                        fCalendar.set(Calendar.SECOND , 0);
                         binding.edTime.setText(selectedHour+ " : " + selectedMinute);
                     }
                 }, hour, minute, true);//Yes 24 hour time
@@ -146,9 +130,11 @@ public class AddTripActivity extends AppCompatActivity {
                 if(validateError() == true) {
                     Calendar calendar = Calendar.getInstance();
                     long nowMillis = calendar.getTimeInMillis();
-                    long diff = mCalendar.getTimeInMillis() - nowMillis;
+                    long diff = fCalendar.getTimeInMillis() - nowMillis;
                     viewModel.insertTrip(trip,diff);
                     if (binding.switch1.isChecked()){
+                         nowMillis = calendar.getTimeInMillis();
+                         diff = rCalendar.getTimeInMillis() - nowMillis;
                         LatLng endLatLng=new LatLng(trip.getStartLatitude(),trip.getEndLongitude());
                         trip.setDate(binding.edDate2.getText().toString());
                         trip.setTime(binding.edTime2.getText().toString());
@@ -171,10 +157,10 @@ public class AddTripActivity extends AppCompatActivity {
                 DatePickerDialog dialog = new DatePickerDialog(AddTripActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        mCalendar.set(Calendar.YEAR , year);
-                        mCalendar.set(Calendar.MONTH , month);
-                        mCalendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
-                        String date = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
+                        rCalendar.set(Calendar.YEAR , year);
+                        rCalendar.set(Calendar.MONTH , month);
+                        rCalendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
+                        String date = DateFormat.getDateInstance(DateFormat.FULL).format(fCalendar.getTime());
                         binding.edDate2.setText(date);
                     }
                 } , c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.MONTH));
@@ -196,9 +182,9 @@ public class AddTripActivity extends AppCompatActivity {
                 mTimePicker = new TimePickerDialog(AddTripActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        mCalendar.set(Calendar.MINUTE , minute);
-                        mCalendar.set(Calendar.HOUR_OF_DAY , selectedHour);
-                        mCalendar.set(Calendar.SECOND , 0);
+                        rCalendar.set(Calendar.MINUTE , minute);
+                        rCalendar.set(Calendar.HOUR_OF_DAY , selectedHour);
+                        rCalendar.set(Calendar.SECOND , 0);
                         binding.edTime2.setText(selectedHour+ " : " + selectedMinute);
                     }
                 }, hour, minute, true);
@@ -207,7 +193,6 @@ public class AddTripActivity extends AppCompatActivity {
 
             }
         });
-
        binding.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -112,14 +112,16 @@
         android:id="@+id/edTime"
         android:layout_width="170dp"
         android:layout_height="54dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
         android:background="@drawable/rounded_for_date_time"
         android:ems="10"
+
         android:focusable="false"
         android:hint="@string/Time"
-
         android:inputType="time"
         android:padding="@dimen/_10sdp"
         android:paddingLeft="@dimen/_8sdp"
@@ -156,30 +158,16 @@
         android:id="@+id/checkBox"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_32sdp"
-        android:layout_marginLeft="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginStart="416dp"
+        android:layout_marginLeft="416dp"
 
         android:background="@drawable/chbx_background"
         android:text="@string/Done"
         android:textSize="@dimen/_18ssp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_endPoint" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginLeft="@dimen/_16sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:text="TextView"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/_18ssp"
-        android:textStyle="bold|italic"
-        app:layout_constraintStart_toEndOf="@+id/checkBox"
-        app:layout_constraintTop_toBottomOf="@+id/details_btn_edit" />
+        app:layout_constraintTop_toBottomOf="@+id/details_btn_shownotes" />
 
     <ImageView
         android:id="@+id/imageView11"

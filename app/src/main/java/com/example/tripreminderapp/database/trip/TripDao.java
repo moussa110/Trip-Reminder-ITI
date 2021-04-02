@@ -10,8 +10,11 @@ import java.util.List;
 
 @Dao
 public interface TripDao {
-    @Query("SELECT * FROM Trip where email=:mail order by date_time asc ")
+    @Query("SELECT * FROM Trip where isDone = 0 and isCanceled = 0 and email=:mail order by date_time asc ")
     List<Trip> getAll(String mail);
+
+    @Query("SELECT * FROM Trip where email=:mail order by date_time asc ")
+    List<Trip> getAllf(String mail);
 
     @Query("SELECT * FROM Trip WHERE isDone = 1 or isCanceled = 1 and email=:mail  order by date_time asc ")
     List<Trip> getTripDone(String mail);

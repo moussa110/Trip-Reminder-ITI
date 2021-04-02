@@ -18,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tripreminderapp.FloatWidgetService;
 import com.example.tripreminderapp.R;
+import com.example.tripreminderapp.database.FirebaseHandler;
 import com.example.tripreminderapp.database.TripDatabase;
 import com.example.tripreminderapp.database.note.Note;
 import com.example.tripreminderapp.database.trip.Trip;
@@ -57,10 +58,15 @@ public class UpcomingTripsFragment extends Fragment {
         tripsViewModel = new ViewModelProvider(this).get(UpcomingTripsViewModel.class);
         Toast.makeText(getActivity(), ""+ auth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
         binding.homeRvTrips.setAdapter(upcomingTripAdapter);
-
         tripsViewModel.getTripsListLiveData().observe(getViewLifecycleOwner(), trips -> {
             upcomingTripAdapter.changeData(trips);
         });
+
+        List<Trip> tripss =TripDatabase.getInstance(getActivity()).tripDao().getAll(auth.getCurrentUser().getEmail());
+        if (tripss.size()==0){
+            FirebaseHandler handler = new FirebaseHandler(getActivity());
+            handler.getTripsByEmail();
+        }
 
 
         upcomingTripAdapter.setAddNoteClickListener = new UpcomingTripAdapter.AddNoteClickListener() {
@@ -102,8 +108,6 @@ public class UpcomingTripsFragment extends Fragment {
                     getActivity().startService(startIntent);
                 }
                 showTripDialog(trip);
-                //getLangLat(trip.getStartPoint());
-                //getLangLat(trip.getEndPoint());
             }
         };
 
@@ -179,11 +183,10 @@ public class UpcomingTripsFragment extends Fragment {
         view.findViewById(R.id.btn_okay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.OK, Toast.LENGTH_SHORT).show();
                 DisplayTrack(trip.getEndPoint());
                 trip.setDone(true);
-               // TripDatabase.getInstance(getActivity()).tripDao().updateTrip(trip.getName(),trip.getStartPoint(),trip.getEndPoint(),trip.getDate(),trip.getTime(),trip.getDate_time(),trip.getIsAlarmPrepared(),trip.isOK(),trip.getSpinner(),trip.getId());
-                TripDatabase.getInstance(getActivity()).tripDao().update(trip);
+                tripsViewModel.updateTrip(trip);
 
                 addToHistory.dismiss();
             }
@@ -200,8 +203,8 @@ public class UpcomingTripsFragment extends Fragment {
         view.findViewById(R.id.btn_okay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tripsViewModel.deleteTrip(trip);
-                tripsViewModel.getTripsFromDatabase();
+                trip.setCanceled(true);
+                tripsViewModel.updateTrip(trip);
                 deletTripDialog.dismiss();
             }
         });
