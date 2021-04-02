@@ -59,4 +59,9 @@
     <string name="Title">Title</string>
     <string name="Description">Description</string>
     <string name="is_round_trip">is round trip?</string>
+    <string name="Add_notes">Add notes</string>
+    <string name="start">start</string>
+    <string name="cancel">cancel</string>
+    <string name="Dismiss">Dismiss</string>
+    <string name="Show_Notes">Show Notes</string>
 </resources>

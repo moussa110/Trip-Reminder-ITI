@@ -20,7 +20,8 @@
         app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_map" />
+        app:srcCompat="@android:drawable/ic_dialog_map"
+        app:tint= "@color/white"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dash_rv_trip"

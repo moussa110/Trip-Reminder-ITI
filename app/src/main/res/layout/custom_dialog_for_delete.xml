@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/_30sdp"
     android:layout_marginRight="@dimen/_30sdp"
-    android:elevation="@dimen/_10sdp">
+    android:elevation="@dimen/_10sdp"
+    app:cardCornerRadius="@dimen/_15sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,7 +23,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:text="@string/delete_trip"
             android:textSize="@dimen/_14ssp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
