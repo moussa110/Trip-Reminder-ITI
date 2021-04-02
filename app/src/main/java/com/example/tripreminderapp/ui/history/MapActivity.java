@@ -25,6 +25,8 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.RoundCap;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -35,15 +37,15 @@ public  class MapActivity extends AppCompatActivity implements OnMapReadyCallbac
     List<Trip>trips;
     double Slangtude,Slatitude,Elangtude,Elatitude;
     int color;
-
+    private FirebaseAuth auth =FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         tripDatabase = TripDatabase.getInstance(getApplication());
-        tripDatabase.tripDao().getTripDone();
-        trips = tripDatabase.tripDao().getTripDone();
+        tripDatabase.tripDao().getTripDone(auth.getCurrentUser().getEmail());
+        trips = tripDatabase.tripDao().getTripDone(auth.getCurrentUser().getEmail());
         for(Trip list:trips){
                 Slangtude = list.getStartLongitude();
                 Slatitude = list.getStartLatitude();

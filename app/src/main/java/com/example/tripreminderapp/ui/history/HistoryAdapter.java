@@ -4,7 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,7 +41,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.endPointTv.setText(trip.getEndPoint());
         holder.dateTv.setText(trip.getDate());
         holder.timeTv.setText(trip.getTime());
-        holder.statusTv.setText(trip.getStatus());
 
 
     }
@@ -68,8 +67,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         TextView timeTv;
         TextView dateTv;
         TextView statusTv;
-        ImageView startIv;
-        ImageView deleteIv;
+        Button startBtn;
+        Button deleteBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,8 +78,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             dateTv = itemView.findViewById(R.id.item_tv_date);
             timeTv = itemView.findViewById(R.id.item_tv_time);
             statusTv = itemView.findViewById(R.id.item_tv_status);
-            startIv = itemView.findViewById(R.id.item_iv_start);
-            deleteIv = itemView.findViewById(R.id.delete_trip);
+            startBtn = itemView.findViewById(R.id.item_btn_start);
+            deleteBtn = itemView.findViewById(R.id.item_btn_cancel);
         }
     }
 }

@@ -159,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 // Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
                 firebaseAuthWithGoogle(account.getIdToken());
+
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                 Toast.makeText(this, "Register with google success", Toast.LENGTH_SHORT).show();
             } catch (ApiException e) {

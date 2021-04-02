@@ -16,134 +16,34 @@ public class Trip implements Serializable {
     private String date;
     private String time;
     private String date_time;
-    private String status;
-   // private String type;
+    private String email;
+    private boolean isDone;
+    private boolean isCanceled;
     private double startLatitude;
     private double startLongitude;
     private double endLatitude;
     private double endLongitude;
-    private boolean isOK;
-    private boolean isAlarmPrepared;
-
-    public Trip(String name, String startPoint, String endPoint, String date, String time, String date_time, String type) {
-        this.id = id;
-        this.name = name;
-        this.startPoint = startPoint;
-        this.endPoint = endPoint;
-        this.date = date;
-        this.time = time;
-        this.date_time = date_time;
-        this.isAlarmPrepared = false;
-        isOK=false;
-        //this.type = type;
-
-    }
-
-    public Trip(int id, String name, String startPoint, String endPoint, String date, String time, String date_time, String status, String type, double startLatitude, double startLongitude, double endLatitude, double endLongitude, boolean isOK, boolean isAlarmPrepared) {
-        this.id = id;
-        this.name = name;
-        this.startPoint = startPoint;
-        this.endPoint = endPoint;
-        this.date = date;
-        this.time = time;
-        this.date_time = date_time;
-        this.status = status;
-        //this.type = type;
-        this.startLatitude = startLatitude;
-        this.startLongitude = startLongitude;
-        this.endLatitude = endLatitude;
-        this.endLongitude = endLongitude;
-        this.isOK = isOK;
-        this.isAlarmPrepared = isAlarmPrepared;
-    }
 
     public Trip() {
-        this.isAlarmPrepared = false;
-        this.isOK = false;
+        isDone=false;
+        isCanceled=false;
     }
 
-    public Trip(String name, String startPoint, String endPoint, String date, String time) {
-        this.name = name;
-        this.startPoint = startPoint;
-        this.endPoint = endPoint;
-        this.date = date;
-        this.time = time;
-        this.isAlarmPrepared = false;
-        isOK=false;
-    }
-
-    public Trip(int id, String name, String startPoint, String endPoint, String date, String time) {
+    public Trip(int id, String name, String startPoint, String endPoint, String date, String time, String date_time, String email, boolean isDone, boolean isCanceled, double startLatitude, double startLongitude, double endLatitude, double endLongitude) {
         this.id = id;
         this.name = name;
         this.startPoint = startPoint;
         this.endPoint = endPoint;
         this.date = date;
         this.time = time;
-        this.isAlarmPrepared = false;
-        isOK=false;
-    }
-
-
-    public double getStartLatitude() {
-        return startLatitude;
-    }
-
-    public void setStartLatitude(double startLatitude) {
-        this.startLatitude = startLatitude;
-    }
-
-    public double getStartLongitude() {
-        return startLongitude;
-    }
-
-    public void setStartLongitude(double startLongitude) {
-        this.startLongitude = startLongitude;
-    }
-
-    public double getEndLatitude() {
-        return endLatitude;
-    }
-
-    public void setEndLatitude(double endLatitude) {
-        this.endLatitude = endLatitude;
-    }
-
-    public double getEndLongitude() {
-        return endLongitude;
-    }
-
-    public void setEndLongitude(double endLongitude) {
-        this.endLongitude = endLongitude;
-    }
-
-    public boolean isAlarmPrepared() {
-        return isAlarmPrepared;
-    }
-
-    public void setAlarmPrepared(boolean alarmPrepared) {
-        isAlarmPrepared = alarmPrepared;
-    }
-
-//    public String getType() {
-//        return type;
-//    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-
-    public String getDate_time() {
-        return date_time;
-    }
-
-
-    public void setDate_time(String date_time) {
         this.date_time = date_time;
+        this.email = email;
+        this.isDone = isDone;
+        this.isCanceled = isCanceled;
+        this.startLatitude = startLatitude;
+        this.startLongitude = startLongitude;
+        this.endLatitude = endLatitude;
+        this.endLongitude = endLongitude;
     }
 
     public int getId() {
@@ -194,21 +94,68 @@ public class Trip implements Serializable {
         this.time = time;
     }
 
-    public boolean isOK() { return isOK; }
-
-    public void setOK(boolean OK) {
-        this.isOK = OK;
-        if(OK == true){
-            setStatus("done");
-        }else {
-            setStatus("Canceled");
-        }
+    public String getDate_time() {
+        return date_time;
     }
 
-//    public void setType(String type) {
-//        this.type = type;
-//    }
+    public void setDate_time(String date_time) {
+        this.date_time = date_time;
+    }
 
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    }
+
+    public void setDone(boolean done) {
+        isDone = done;
+    }
+
+    public boolean isCanceled() {
+        return isCanceled;
+    }
+
+    public void setCanceled(boolean canceled) {
+        isCanceled = canceled;
+    }
+
+    public double getStartLatitude() {
+        return startLatitude;
+    }
+
+    public void setStartLatitude(double startLatitude) {
+        this.startLatitude = startLatitude;
+    }
+
+    public double getStartLongitude() {
+        return startLongitude;
+    }
+
+    public void setStartLongitude(double startLongitude) {
+        this.startLongitude = startLongitude;
+    }
+
+    public double getEndLatitude() {
+        return endLatitude;
+    }
+
+    public void setEndLatitude(double endLatitude) {
+        this.endLatitude = endLatitude;
+    }
+
+    public double getEndLongitude() {
+        return endLongitude;
+    }
+
+    public void setEndLongitude(double endLongitude) {
+        this.endLongitude = endLongitude;
+    }
 }
 

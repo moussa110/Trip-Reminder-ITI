@@ -80,7 +80,8 @@ public class FirebaseHandler {
         deleteAllData();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference = firebaseDatabase.getReference();
-        List<Trip> tripList = TripDatabase.getInstance(context).tripDao().getAll();
+        List<Trip> tripList = null;
+        // = TripDatabase.getInstance(context).tripDao().getAll();
         for (int indx = 0; indx < tripList.size(); ++indx) {
             Trip trip = tripList.get(indx);
             reference.child("trips").child(userEmail).push().setValue(trip).addOnCompleteListener(task -> {

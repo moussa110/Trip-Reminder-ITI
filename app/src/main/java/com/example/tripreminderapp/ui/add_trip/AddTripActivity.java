@@ -33,10 +33,12 @@ import com.example.tripreminderapp.databinding.ActivityAddTripBinding;
 import com.example.tripreminderapp.reminder.MyService;
 import com.example.tripreminderapp.reminder.MyWorker;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -46,15 +48,15 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class AddTripActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class AddTripActivity extends AppCompatActivity {
 
     private ActivityAddTripBinding binding;
     private static final int REQ_CODE = 111;
     private AddTripViewModel viewModel;
-   // private Spinner spinner;
     private Trip trip = new Trip();
     private Calendar mCalendar;
-     Switch aSwitch;
+    private FirebaseAuth auth =FirebaseAuth.getInstance();
+
 
 
     @Override
@@ -65,9 +67,6 @@ public class AddTripActivity extends AppCompatActivity implements AdapterView.On
         viewModel = ViewModelProviders.of(this).get(AddTripViewModel.class);
         getSupportActionBar().hide();
         mCalendar =Calendar.getInstance();
-        aSwitch = findViewById(R.id.switch1);
-
-        syncDataWithFirebaseDatabase(TripDatabase.getInstance(getApplicationContext()).tripDao().getAll());
 
 
         Places.initialize(getApplicationContext(), getString(R.string.api_places_key));
@@ -91,7 +90,7 @@ public class AddTripActivity extends AppCompatActivity implements AdapterView.On
             }
         });
 
-        binding.edDate.getEditText().setOnClickListener(new View.OnClickListener() {
+        binding.edDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar c = Calendar.getInstance();
@@ -101,18 +100,17 @@ public class AddTripActivity extends AppCompatActivity implements AdapterView.On
                         mCalendar.set(Calendar.YEAR , year);
                         mCalendar.set(Calendar.MONTH , month);
                         mCalendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
-                        String date = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
-                        binding.edDate.getEditText().setText(date);
+                        String date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(mCalendar.getTime());
+                        binding.edDate.setText(date);
                     }
                 } , c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
                 dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-
                 dialog.show();
             }
 
         });
 
-        binding.edTime.getEditText().setOnClickListener(new View.OnClickListener() {
+        binding.edTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -126,7 +124,7 @@ public class AddTripActivity extends AppCompatActivity implements AdapterView.On
                         mCalendar.set(Calendar.MINUTE , selectedMinute);
                         mCalendar.set(Calendar.HOUR_OF_DAY , selectedHour);
                         mCalendar.set(Calendar.SECOND , 0);
-                        binding.edTime.getEditText().setText(selectedHour+ " : " + selectedMinute);
+                        binding.edTime.setText(selectedHour+ " : " + selectedMinute);
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -141,171 +139,84 @@ public class AddTripActivity extends AppCompatActivity implements AdapterView.On
                 trip.setName(binding.edName.getEditText().getText().toString());
                 trip.setStartPoint(binding.edStartPoint.getEditText().getText().toString());
                 trip.setEndPoint(binding.edEndPoint.getEditText().getText().toString());
-                trip.setDate(binding.edDate.getEditText().getText().toString());
-                trip.setTime(binding.edTime.getEditText().getText().toString());
-                trip.setDate_time(binding.edDate.getEditText().getText().toString()+" "+binding.edTime.getEditText().getText().toString());
-              //  trip.setType(getResources().getStringArray(R.array.types)[spinner.getSelectedItemPosition()]);
+                trip.setEmail(auth.getCurrentUser().getEmail());
+                trip.setDate(binding.edDate.getText().toString());
+                trip.setTime(binding.edTime.getText().toString());
+                trip.setDate_time(binding.edDate.getText().toString()+" "+binding.edTime.getText().toString());
                 if(validateError() == true) {
-                    viewModel.insertTrip(trip);
-
                     Calendar calendar = Calendar.getInstance();
                     long nowMillis = calendar.getTimeInMillis();
                     long diff = mCalendar.getTimeInMillis() - nowMillis;
-                   // long va = SystemClock.elapsedRealtime() + mCalendar.getTimeInMillis();
-                    Data inputData = new Data.Builder()
-                            .putString("data", trip.getDate_time())
-                            .build();
-
-                    WorkRequest uploadWorkRequest =
-                            new OneTimeWorkRequest.Builder(MyWorker.class)
-                                    .setInputData(inputData)
-                                    .setInitialDelay(diff, TimeUnit.MILLISECONDS)
-                                    .build();
-                    WorkManager.getInstance(getApplication()).enqueue(uploadWorkRequest);
+                    viewModel.insertTrip(trip,diff);
+                    if (binding.switch1.isChecked()){
+                        LatLng endLatLng=new LatLng(trip.getStartLatitude(),trip.getEndLongitude());
+                        trip.setDate(binding.edDate2.getText().toString());
+                        trip.setTime(binding.edTime2.getText().toString());
+                        trip.setStartPoint(trip.getEndPoint());
+                        trip.setStartLongitude(trip.getEndLongitude());
+                        trip.setStartLatitude(trip.getEndLatitude());
+                        trip.setEndPoint(binding.edStartPoint.getEditText().getText().toString());
+                        trip.setEndLongitude(endLatLng.longitude);
+                        trip.setEndLatitude(endLatLng.latitude);
+                        viewModel.insertTrip(trip,diff);
+                    }
                 }
+            }
+        });
+
+        binding.edDate2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar c = Calendar.getInstance();
+                DatePickerDialog dialog = new DatePickerDialog(AddTripActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        mCalendar.set(Calendar.YEAR , year);
+                        mCalendar.set(Calendar.MONTH , month);
+                        mCalendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
+                        String date = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
+                        binding.edDate2.setText(date);
+                    }
+                } , c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.MONTH));
+                dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+                dialog.show();
+            }
+
+        });
+
+        binding.edTime2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Calendar mcurrentTime = Calendar.getInstance();
+                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = mcurrentTime.get(Calendar.MINUTE);
+                TimePickerDialog mTimePicker;
+                mTimePicker = new TimePickerDialog(AddTripActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                        mCalendar.set(Calendar.MINUTE , minute);
+                        mCalendar.set(Calendar.HOUR_OF_DAY , selectedHour);
+                        mCalendar.set(Calendar.SECOND , 0);
+                        binding.edTime2.setText(selectedHour+ " : " + selectedMinute);
+                    }
+                }, hour, minute, true);
+                mTimePicker.setTitle("Select Time");
+                mTimePicker.show();
 
             }
         });
-        /*
-        binding.addNewTripBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                trip.setName(binding.edName.getEditText().getText().toString());
-                trip.setStartPoint(binding.edStartPoint.getEditText().getText().toString());
-                trip.setEndPoint(binding.edEndPoint.getEditText().getText().toString());
-                trip.setDate(binding.edDate.getEditText().getText().toString());
-                trip.setTime(binding.edTime.getEditText().getText().toString());
 
-                trip.setDate_time(binding.edDate.getEditText().getText().toString()+" "+binding.edTime.getEditText().getText().toString());
-                // trip.setType(getResources().getStringArray(R.array.types)[spinner.getSelectedItemPosition()]);
-
-
-
-                if(validateError() == true) {
-                    viewModel.insertTrip(trip);
-                }
-
-            }
-        });*/
-
-
-
-
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+       binding.switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked == false){
-                    binding.edDate2.getEditText().setEnabled(false);
-                    binding.edTime2.getEditText().setEnabled(false);
-
-
-
-
-                }else{
-                    binding.edDate2.getEditText().setEnabled(true);
-                    binding.edDate2.getEditText().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Calendar c = Calendar.getInstance();
-                            DatePickerDialog dialog = new DatePickerDialog(AddTripActivity.this, new DatePickerDialog.OnDateSetListener() {
-                                @Override
-                                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                        String _year = String.valueOf(year);
-//                        String _month = (month+1) < 10 ? "0" + (month+1) : String.valueOf(month+1);
-//                        String _date = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
-//                        String _pickedDate = _year + "-" + _month + "-" + _date;
-//                        Log.e("PickedDate: ", "Date: " + _pickedDate);
-                                    mCalendar.set(Calendar.YEAR , year);
-                                    mCalendar.set(Calendar.MONTH , month);
-                                    mCalendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
-                                    String date = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
-                                    binding.edDate2.getEditText().setText(date);
-                                }
-                            } , c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.MONTH));
-                            dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-
-                            dialog.show();
-                        }
-
-                    });
-
-
-
-                    binding.edTime2.getEditText().setEnabled(true);
-                    binding.edTime2.getEditText().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // TODO Auto-generated method stub
-                            Calendar mcurrentTime = Calendar.getInstance();
-                            int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                            int minute = mcurrentTime.get(Calendar.MINUTE);
-                            TimePickerDialog mTimePicker;
-                            mTimePicker = new TimePickerDialog(AddTripActivity.this, new TimePickerDialog.OnTimeSetListener() {
-                                @Override
-                                public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                                    mCalendar.set(Calendar.MINUTE , minute);
-                                    mCalendar.set(Calendar.HOUR_OF_DAY , selectedHour);
-                                    mCalendar.set(Calendar.SECOND , 0);
-                                    binding.edTime2.getEditText().setText(selectedHour+ " : " + selectedMinute);
-                                }
-                            }, hour, minute, true);//Yes 24 hour time
-                            mTimePicker.setTitle("Select Time");
-                            mTimePicker.show();
-
-                        }
-                    });
-
-
-                    binding.addNewTripBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            Intent intent = new Intent(getApplicationContext(), MyService.class);
-                            PendingIntent pintent = PendingIntent.getService(getApplicationContext(), 0, intent, 0);
-
-                            AlarmManager alarm = null;
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-
-                                alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-                                // alarm.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pintent);
-                                alarm.setExact(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(),pintent);
-                            }
-
-
-
-
-
-                            trip.setName(binding.edName.getEditText().getText().toString());
-                            trip.setStartPoint(binding.edStartPoint.getEditText().getText().toString());
-                            trip.setEndPoint(binding.edEndPoint.getEditText().getText().toString());
-                            trip.setDate(binding.edDate.getEditText().getText().toString());
-                            trip.setTime(binding.edTime.getEditText().getText().toString());
-
-                            trip.setDate_time(binding.edDate.getEditText().getText().toString()+" "+binding.edTime.getEditText().getText().toString());
-                            //       trip.setType(getResources().getStringArray(R.array.types)[spinner.getSelectedItemPosition()]);
-
-
-
-
-
-                            if(validateError() == true) {
-                                viewModel.insertTrip(trip);
-                            }
-
-                            trip.setName(binding.edName.getEditText().getText().toString()+"Round trip");
-                            trip.setStartPoint(binding.edEndPoint.getEditText().getText().toString());
-                            trip.setEndPoint(binding.edStartPoint.getEditText().getText().toString());
-                            trip.setDate(binding.edDate2.getEditText().getText().toString());
-                            trip.setTime(binding.edTime2.getEditText().getText().toString());
-
-                            trip.setDate_time(binding.edDate2.getEditText().getText().toString()+" "+binding.edTime2.getEditText().getText().toString());
-                            if(validateError() == true) {
-                                viewModel.insertTrip(trip);
-                            }
-
-                        }
-                    });
-
+                if (!isChecked) {
+                    binding.edDate2.setVisibility(View.GONE);
+                    binding.edTime2.setVisibility(View.GONE);
+                } else {
+                    binding.edDate2.setVisibility(View.VISIBLE);
+                    binding.edTime2.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -332,23 +243,14 @@ public class AddTripActivity extends AppCompatActivity implements AdapterView.On
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-
     private Boolean validateError() {
         String tNameVal = binding.edName.getEditText().getText().toString();
         String spointVal = binding.edStartPoint.getEditText().getText().toString();
         String epointVal = binding.edEndPoint.getEditText().getText().toString();
-        String dateVal = binding.edDate.getEditText().getText().toString();
-        String timeVal = binding.edTime.getEditText().getText().toString();
+        String dateVal = binding.edDate.getText().toString();
+        String timeVal = binding.edTime.getText().toString();
+        String date2Val = binding.edDate2.getText().toString();
+        String time2Val = binding.edTime2.getText().toString();
         if(tNameVal.isEmpty() ){
             binding.edName.setError("TripName Required");
             binding.edName.requestFocus();
@@ -374,6 +276,14 @@ public class AddTripActivity extends AppCompatActivity implements AdapterView.On
             binding.edTime.setError("Time required");
             binding.edTime.requestFocus();
             return false;
+        }else if(time2Val.isEmpty() && binding.switch1.isChecked()) {
+            binding.edTime2.setError("Time required");
+            binding.edTime2.requestFocus();
+            return false;
+        }else if(date2Val.isEmpty() && binding.switch1.isChecked()) {
+            binding.edDate2.setError("date reqquired");
+            binding.edDate2.requestFocus();
+            return false;
         }
         else {
             binding.edName.setError(null);
@@ -386,31 +296,20 @@ public class AddTripActivity extends AppCompatActivity implements AdapterView.On
             binding.edEndPoint.setErrorEnabled(false);
 
             binding.edDate.setError(null);
-            binding.edDate.setErrorEnabled(false);
 
             binding.edTime.setError(null);
-            binding.edTime.setErrorEnabled(false);
+
+            binding.edDate2.setError(null);
+
+            binding.edTime2.setError(null);
+
+
 
             return true;
         }
 
     }
 
-    void syncDataWithFirebaseDatabase(final List<Trip> tripList) {
-
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference reference = firebaseDatabase.getReference();
-
-        //String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        for (int indx = 0; indx < tripList.size(); ++indx) {
-
-            Trip trip = tripList.get(indx);
-            reference.child("trips").child("mahmoud").push().setValue(trip).addOnCompleteListener(task -> {
-                Toast.makeText(getApplicationContext(), "done", Toast.LENGTH_SHORT).show();
-            });
-        }
-    }
 
 }
 

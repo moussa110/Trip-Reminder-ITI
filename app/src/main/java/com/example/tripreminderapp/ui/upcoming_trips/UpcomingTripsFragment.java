@@ -110,10 +110,6 @@ public class UpcomingTripsFragment extends Fragment {
         upcomingTripAdapter.setDeletTrip = new UpcomingTripAdapter.DeletTrip() {
             @Override
             public void onClick(Trip trip) {
-//                Toast.makeText(getActivity(), "trip Deleted", Toast.LENGTH_SHORT).show();
-//                TripDatabase.getInstance(getActivity()).tripDao().delete(trip);
-//                trips = TripDatabase.getInstance(getActivity()).tripDao().getAll();
-//                upcomingTripAdapter.changeData(trips);
                 showDeleteDialog(trip);
             }
         };
@@ -185,7 +181,7 @@ public class UpcomingTripsFragment extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "OK", Toast.LENGTH_SHORT).show();
                 DisplayTrack(trip.getEndPoint());
-                trip.setOK(true);
+                trip.setDone(true);
                // TripDatabase.getInstance(getActivity()).tripDao().updateTrip(trip.getName(),trip.getStartPoint(),trip.getEndPoint(),trip.getDate(),trip.getTime(),trip.getDate_time(),trip.getIsAlarmPrepared(),trip.isOK(),trip.getSpinner(),trip.getId());
                 TripDatabase.getInstance(getActivity()).tripDao().update(trip);
 
@@ -196,8 +192,6 @@ public class UpcomingTripsFragment extends Fragment {
         addToHistory.show();
     }
 
-
-    //show dialog for delete
     public void showDeleteDialog(Trip trip){
         LayoutInflater factory = LayoutInflater.from(getActivity());
         View view = factory.inflate(R.layout.custom_dialog_for_delete, null);
@@ -206,25 +200,15 @@ public class UpcomingTripsFragment extends Fragment {
         view.findViewById(R.id.btn_okay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "trip Deleted", Toast.LENGTH_SHORT).show();
-                TripDatabase.getInstance(getActivity()).tripDao().delete(trip);
+                tripsViewModel.deleteTrip(trip);
+                tripsViewModel.getTripsFromDatabase();
                 deletTripDialog.dismiss();
             }
         });
-
         deletTripDialog.show();
 
 
     }
-
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        trips = TripDatabase.getInstance(getActivity()).tripDao().getAll();
-//        upcomingTripAdapter.changeData(trips);
-//    }
-
-
 
 
 }
