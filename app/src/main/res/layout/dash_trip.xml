@@ -5,148 +5,153 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardMaxElevation="@dimen/_10sdp"
-    app:cardCornerRadius="@dimen/_16sdp"
-    app:cardUseCompatPadding="true">
+    android:layout_margin="@dimen/_5sdp"
+    android:elevation="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="386dp"
-        android:layout_height="279dp"
-        android:background="@color/white"
-        android:padding="@dimen/_8sdp">
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#31C3E6FC">
         <TextView
             android:id="@+id/item_tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:padding="@dimen/_8sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_2sdp"
             android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:textSize="@dimen/_14ssp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="airport trip" />
-
-        <TextView
-            android:id="@+id/item_tv_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView"
-            tools:text="airport trip" />
-
-        <TextView
-            android:id="@+id/item_tv_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintStart_toStartOf="@+id/item_tv_start"
-            app:layout_constraintTop_toTopOf="@+id/textView2"
-            tools:text="airport trip" />
-
-        <TextView
-            android:id="@+id/item_tv_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_32sdp"
-            android:layout_marginEnd="@dimen/_36sdp"
-            android:layout_marginRight="@dimen/_36sdp"
-            android:background="@color/white"
-            android:text="8:20"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/item_tv_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginLeft="8dp"
-            android:background="@color/white"
-            android:text="15-2-2020"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView"
-            app:layout_constraintVertical_bias="@+id/imageView" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginLeft="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_24sdp"
-            android:background="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_calendar"
-            tools:ignore="VectorDrawableCompat" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_32sdp"
-            android:background="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/item_tv_time"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic__4_hours_support"
-            tools:ignore="VectorDrawableCompat" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_16sdp"
-            android:layout_marginLeft="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_24sdp"
-            android:background="@color/white"
-            android:text="@string/From"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_24sdp"
-            android:text="@string/to"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            app:layout_constraintHorizontal_bias="0.454"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
-
 
         <TextView
             android:id="@+id/item_tv_status"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_16sdp"
-            android:layout_marginEnd="@dimen/_32sdp"
-            android:layout_marginRight="@dimen/_32sdp"
-            android:layout_marginBottom="@dimen/_32sdp"
+            android:layout_marginTop="16dp"
             android:text="@string/Done"
             android:textColor="@android:color/black"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/delete_trip"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginStart="@dimen/_32sdp"
-            android:layout_marginLeft="@dimen/_32sdp"
-            android:layout_marginBottom="@dimen/_24sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <LinearLayout
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2"
+            android:layout_marginTop="@dimen/_2sdp"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_name"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/delete"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/item_tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="8dp"
+                android:padding="10dp"
+                android:layout_marginRight="@dimen/_4sdp"
+                tools:text="Apr 2, 2021"
+                android:textStyle="bold"
+                android:drawableLeft="@drawable/ic_calendar" />
+
+            <TextView
+                android:id="@+id/item_tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_4sdp"
+                android:drawableStart="@drawable/ic_clock"
+                android:drawablePadding="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
+                android:text="8:20"
+                android:textStyle="bold"
+                android:drawableLeft="@drawable/ic_clock" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/viw2"
+            android:layout_width="391dp"
+            android:layout_height="97dp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:orientation="vertical"
+            android:weightSum="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view1">
+
+            <TextView
+                android:id="@+id/item_tv_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_marker_start"
+                android:drawableLeft="@drawable/ic_marker_start"
+                android:drawablePadding="@dimen/_10sdp"
+                android:maxLines="2"
+                android:padding="@dimen/_10sdp"
+                android:textStyle="bold"
+                tools:text="cairo, alex, tanta" />
+
+            <TextView
+                android:id="@+id/item_tv_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_marker_end"
+                android:drawableLeft="@drawable/ic_marker_end"
+                android:drawablePadding="@dimen/_10sdp"
+                android:maxLines="2"
+                android:padding="@dimen/_10sdp"
+                android:text="cairo, alex, tanta"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/viw3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintTop_toBottomOf="@id/viw2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <Button
+                android:id="@+id/delete_trip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
+                android:text="cancel"
+                android:textStyle="bold"
+                app:backgroundTint="#C65353" />
+
+            <Button
+                android:id="@+id/item_btn_add_notes"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:drawablePadding="@dimen/_10sdp"
+                android:padding="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:text="Show Notes"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -4,7 +4,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tripreminderapp.R;
 import com.example.tripreminderapp.database.trip.Trip;
+import com.example.tripreminderapp.ui.upcoming_trips.UpcomingTripAdapter;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     private List<Trip> data = null;
 
+    public DeletTrip setDeletTrip = null;
 
     public void changeData(List<Trip> tripsData) {
         this.data = tripsData;
@@ -41,7 +43,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.endPointTv.setText(trip.getEndPoint());
         holder.dateTv.setText(trip.getDate());
         holder.timeTv.setText(trip.getTime());
-        holder.statusTv.setText(trip.getStatus());
+
+        if(setDeletTrip != null){
+            holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setDeletTrip.onClick(trip);
+                }
+            });
+        }
 
 
     }
@@ -56,6 +66,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             return data.size();
     }
 
+    public interface DeletTrip{
+        void onClick(Trip trip);
+    }
+
 
 
 
@@ -68,8 +82,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         TextView timeTv;
         TextView dateTv;
         TextView statusTv;
-        ImageView startIv;
-        ImageView deleteIv;
+        Button startBtn;
+        Button deleteBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -79,8 +93,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             dateTv = itemView.findViewById(R.id.item_tv_date);
             timeTv = itemView.findViewById(R.id.item_tv_time);
             statusTv = itemView.findViewById(R.id.item_tv_status);
-            startIv = itemView.findViewById(R.id.item_iv_start);
-            deleteIv = itemView.findViewById(R.id.delete_trip);
+            startBtn = itemView.findViewById(R.id.item_btn_start);
+            deleteBtn = itemView.findViewById(R.id.item_btn_cancel);
         }
     }
 }

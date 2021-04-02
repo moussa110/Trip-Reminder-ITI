@@ -17,20 +17,22 @@ import com.example.tripreminderapp.GeoLocation;
 import com.example.tripreminderapp.database.TripDatabase;
 import com.example.tripreminderapp.database.trip.Trip;
 import com.example.tripreminderapp.databinding.FragmentDashboardBinding;
+import com.example.tripreminderapp.ui.upcoming_trips.UpcomingTripAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 public class HistoryFragment extends Fragment {
     private FragmentDashboardBinding binding;
     private  final HistoryAdapter historyAdapter = new HistoryAdapter();
+    private FirebaseAuth auth =FirebaseAuth.getInstance();
+
+    HistoryViewModel historyViewModel;
 
     String address;
     String[]sentenseArray;
     String lat,lang;
     double latitude,langtude;
-    private HistoryViewModel historyViewModel;
-    List<Trip> startPoints;
-    Trip trip;
 
     public HistoryFragment(){}
 
@@ -42,15 +44,8 @@ public class HistoryFragment extends Fragment {
 
 
 
-        historyViewModel =
-                new ViewModelProvider(this).get(HistoryViewModel.class);
-        //View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
         binding.dashRvTrip.setAdapter(historyAdapter);
-//        historyViewModel.getTripsListLiveData().observe(getViewLifecycleOwner(), trips -> {
-//            historyAdapter.changeData(trips);
-//
-//        });
-
         binding.homeBtnAddTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,11 +54,18 @@ public class HistoryFragment extends Fragment {
 
         });
 
+        
 
 
 
-        historyAdapter.changeData(TripDatabase.getInstance(getActivity()).tripDao().getTripDone());
+
+        historyAdapter.changeData(TripDatabase.getInstance(getActivity()).tripDao().getTripDone(auth.getCurrentUser().getEmail()));
         return view;
+
+
+
+
+
     }
 
     @Override

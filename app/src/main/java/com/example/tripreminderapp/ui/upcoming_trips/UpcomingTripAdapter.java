@@ -3,7 +3,7 @@ package com.example.tripreminderapp.ui.upcoming_trips;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,7 +45,7 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
         holder.dateTv.setText(trip.getDate());
         holder.timeTv.setText(trip.getTime());
         if (setAddNoteClickListener != null) {
-            holder.addNoteIv.setOnClickListener(new View.OnClickListener() {
+            holder.addNoteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     setAddNoteClickListener.onClick(trip);
@@ -65,7 +65,7 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
 
         //Mido
         if (setStartTrip != null) { //java is not safty
-            holder.startIv.setOnClickListener(new View.OnClickListener() {
+            holder.startBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     setStartTrip.onClick(trip);
@@ -76,7 +76,7 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
 
 
         if(setDeletTrip != null){
-            holder.deleteIv.setOnClickListener(new View.OnClickListener() {
+            holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     setDeletTrip.onClick(trip);
@@ -121,9 +121,9 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
         TextView endPointTv;
         TextView timeTv;
         TextView dateTv;
-        ImageView addNoteIv;
-        ImageView startIv;
-        ImageView deleteIv;
+        Button addNoteBtn;
+        Button startBtn;
+        Button deleteBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -132,9 +132,9 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
             endPointTv = itemView.findViewById(R.id.item_tv_end);
             dateTv = itemView.findViewById(R.id.item_tv_date);
             timeTv = itemView.findViewById(R.id.item_tv_time);
-            addNoteIv = itemView.findViewById(R.id.item_iv_addNote);
-            startIv = itemView.findViewById(R.id.item_iv_start);
-            deleteIv = itemView.findViewById(R.id.delete_trip);
+            addNoteBtn = itemView.findViewById(R.id.item_btn_add_notes);
+            startBtn = itemView.findViewById(R.id.item_btn_start);
+            deleteBtn = itemView.findViewById(R.id.item_btn_cancel);
         }
 
     }

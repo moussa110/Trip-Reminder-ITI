@@ -57,4 +57,5 @@
     <string name="save">حفظ</string>
     <string name="Title">العنوان</string>
     <string name="Description">الشرح</string>
+    <string name="is_round_trip">is round trip?</string>
 </resources>

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/lightBlue">
 
     <ImageView
         android:id="@+id/logo"
@@ -15,7 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.110000014"
-        app:srcCompat="@drawable/logo1" />
+        app:srcCompat="@drawable/ic_logo1"
+        tools:ignore="VectorDrawableCompat" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
