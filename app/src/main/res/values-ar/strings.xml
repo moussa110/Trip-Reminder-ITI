@@ -66,6 +66,9 @@
     <string name="moteConfirm">موافق</string>
     <string name="noteUpdate">تعديل</string>
     <string name="OK">موافق</string>
-    <string name="delete">Delete</string>
-    <string name="sync">sync</string>
+    <string name="delete">حذف</string>
+    <string name="sync">تزامن</string>
+    <string name="Logout">خروج</string>
+    <string name="Trip_done">الرحلات التامه</string>
+    <string name="Trip_cancel">الرحلات الملغيه</string>
 </resources>

@@ -69,4 +69,7 @@
     <string name="OK">OK</string>
     <string name="delete">Delete</string>
     <string name="sync">sync</string>
+    <string name="Logout">Logout</string>
+    <string name="Trip_done">Trips done</string>
+    <string name="Trip_cancel">Trips cancel</string>
 </resources>
