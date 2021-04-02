@@ -26,9 +26,14 @@ public class HistoryViewModel extends AndroidViewModel {
 
 
 
-    private void getTripsFromDatabase() {
+     void getTripsFromDatabase() {
         tripsListLiveData.setValue(database.tripDao().getTripDone(auth.getCurrentUser().getEmail()));
     }
+
+    public  void deleteTrip(Trip trip){
+        TripDatabase.getInstance(getApplication()).tripDao().delete(trip);
+    }
+
 
     public MutableLiveData<List<Trip>> getTripsListLiveData() {
         return tripsListLiveData;

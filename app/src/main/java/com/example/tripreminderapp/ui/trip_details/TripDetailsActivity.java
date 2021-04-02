@@ -99,8 +99,8 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
         binding.edName.getEditText().setText(currentTrip.getName());
         binding.edStartPoint.getEditText().setText(currentTrip.getStartPoint());
         binding.edEndPoint.getEditText().setText(currentTrip.getEndPoint());
-        binding.edDate.getEditText().setText(currentTrip.getDate());
-        binding.edTime.getEditText().setText(currentTrip.getTime());
+        binding.edDate.setText(currentTrip.getDate());
+        binding.edTime.setText(currentTrip.getTime());
 
 
         //spinner.setSelection(((ArrayAdapter<String>)spinner.getAdapter()).getPosition(currentTrip.getType()));
@@ -164,9 +164,9 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
                 currentTrip.setName( binding.edName.getEditText().getText().toString());
                 currentTrip.setStartPoint( binding.edStartPoint.getEditText().getText().toString());
                 currentTrip.setEndPoint( binding.edEndPoint.getEditText().getText().toString());
-                currentTrip.setDate( binding.edDate.getEditText().getText().toString());
-                currentTrip.setTime( binding.edTime.getEditText().getText().toString());
-                currentTrip.setDate_time(binding.edDate.getEditText().getText()+" "+ binding.edTime.getEditText().getText().toString());
+                currentTrip.setDate( binding.edDate.getText().toString());
+                currentTrip.setTime( binding.edTime.getText().toString());
+                currentTrip.setDate_time(binding.edDate.getText()+" "+ binding.edTime.getText().toString());
                 viewModel.updateTripInDatabase(currentTrip);
 
             }
@@ -187,7 +187,7 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
 
         };
 
-        binding.edDate.getEditText().setOnClickListener(new View.OnClickListener() {
+        binding.edDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Calendar c = Calendar.getInstance();
@@ -199,7 +199,7 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
                         String _date = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
                         String _pickedDate = _year + "-" + _month + "-" + _date;
                         Log.e("PickedDate: ", "Date: " + _pickedDate); //2019-02-12
-                        binding.edDate.getEditText().setText(_pickedDate);
+                        binding.edDate.setText(_pickedDate);
                         //updateLabel();
                     }
                 }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.MONTH));
@@ -211,7 +211,7 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
         });
 
 
-        binding.edTime.getEditText().setOnClickListener(new View.OnClickListener() {
+        binding.edTime.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -223,7 +223,7 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
                 mTimePicker = new TimePickerDialog(TripDetailsActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        binding.edTime.getEditText().setText(selectedHour + ":" + selectedMinute);
+                        binding.edTime.setText(selectedHour + ":" + selectedMinute);
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -256,15 +256,15 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
             binding.edName.getEditText().setEnabled(true);
             binding.edStartPoint.getEditText().setEnabled(true);
             binding.edEndPoint.getEditText().setEnabled(true);
-            binding.edDate.getEditText().setEnabled(true);
-            binding.edTime.getEditText().setEnabled(true);
+            binding.edDate.setEnabled(true);
+            binding.edTime.setEnabled(true);
             binding.detailsBtnEdit.setText("save");
         } else {
             binding.edName.getEditText().setEnabled(false);
             binding.edStartPoint.getEditText().setEnabled(false);
             binding.edEndPoint.getEditText().setEnabled(false);
-            binding.edDate.getEditText().setEnabled(false);
-            binding.edTime.getEditText().setEnabled(false);
+            binding.edDate.setEnabled(false);
+            binding.edTime.setEnabled(false);
             binding.detailsBtnEdit.setText("update");
         }
     }
@@ -274,7 +274,7 @@ public class TripDetailsActivity extends AppCompatActivity   implements AdapterV
     private void updateLabel() {
         String myFormat = "MM/dd/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        binding.edDate.getEditText().setText(sdf.format(myCalendar.getTime()));
+        binding.edDate.setText(sdf.format(myCalendar.getTime()));
     }
 
 
