@@ -10,12 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.tripreminderapp.R;
 import com.example.tripreminderapp.database.FirebaseHandler;
 import com.example.tripreminderapp.database.TripDatabase;
 import com.example.tripreminderapp.database.trip.Trip;
 import com.example.tripreminderapp.databinding.FragmentProfileBinding;
-import com.example.tripreminderapp.databinding.FragmentUpcomingBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -41,13 +39,19 @@ public class ProfileFragment extends Fragment
         View view = binding.getRoot();
         List<Trip> trips = TripDatabase.getInstance(getActivity()).tripDao().getAll(user.getEmail());
         int done=0;
+        int cancel = 0;
        for (int i =0 ; i <trips.size();i++){
            if (trips.get(i).isDone())
                done++;
+
+           if(trips.get(i).isCanceled())
+               cancel++;
+
        }
 
-       binding.profileTvDoneCount.setText(user.getDisplayName());
-       binding.profileTvCancelCount.setText(""+(trips.size()-done));
+      // binding.profileTvDoneCount.setText(user.getDisplayName());
+       binding.profileTvDoneCount.setText(""+(trips.size()-done));
+       binding.profileTvCancelCount.setText(""+(trips.size()-cancel));
 
         Glide
                 .with(getActivity())
