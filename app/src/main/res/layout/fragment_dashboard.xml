@@ -11,16 +11,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_32sdp"
+        android:layout_marginRight="@dimen/_32sdp"
         android:layout_marginBottom="@dimen/_32sdp"
         android:background="@color/colorPrimary"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="@color/colorPrimary"
         android:tint="@android:color/white"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:layout_marginRight="@dimen/_32sdp" />
+        app:srcCompat="@android:drawable/ic_dialog_map" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dash_rv_trip"

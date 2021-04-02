@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tripreminderapp.R;
 import com.example.tripreminderapp.database.trip.Trip;
+import com.example.tripreminderapp.ui.upcoming_trips.UpcomingTripAdapter;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     private List<Trip> data = null;
 
+    public DeletTrip setDeletTrip = null;
 
     public void changeData(List<Trip> tripsData) {
         this.data = tripsData;
@@ -42,6 +44,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         holder.dateTv.setText(trip.getDate());
         holder.timeTv.setText(trip.getTime());
 
+        if(setDeletTrip != null){
+            holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setDeletTrip.onClick(trip);
+                }
+            });
+        }
+
 
     }
 
@@ -53,6 +64,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             return 0;
         else
             return data.size();
+    }
+
+    public interface DeletTrip{
+        void onClick(Trip trip);
     }
 
 
