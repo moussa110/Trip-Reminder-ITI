@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -325,19 +326,18 @@ public class TripDetailsActivity extends AppCompatActivity {
 
 
     public void showNotesDialog(List<Note> data) {
-        if (data.size()==0)
-            notesDialog.dismiss();
         LayoutInflater factory = LayoutInflater.from(this);
         View view = factory.inflate(R.layout.dialog_show_notes, null);
         notesDialog = new AlertDialog.Builder(this).create();
         notesDialog.setView(view);
-        if (data.size()==0)
-            notesDialog.dismiss();
         RecyclerView recyclerView = view.findViewById(R.id.details_rv_note);
+        TextView noNoteTv = view.findViewById(R.id.tv_no_note);
         recyclerView.setAdapter(notesAdapter);
         notesAdapter.changeData(data);
         notesDialog.show();
-
+        if (data.size()==0) {
+            noNoteTv.setVisibility(View.VISIBLE);
+        }
     }
 
 

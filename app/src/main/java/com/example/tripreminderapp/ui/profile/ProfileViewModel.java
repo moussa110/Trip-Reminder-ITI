@@ -7,18 +7,22 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.tripreminderapp.LoginActivity;
+import com.example.tripreminderapp.database.TripDatabase;
+import com.example.tripreminderapp.database.trip.Trip;
+
+import java.util.List;
+
 public class ProfileViewModel extends AndroidViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<List<Trip>> tripsLiveData = new MutableLiveData<>();
 
     public ProfileViewModel(Application application) {
         super(application);
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        tripsLiveData.setValue(TripDatabase.getInstance(getApplication()).tripDao().getTripDone(LoginActivity.EMAIL));
     }
 
-
-    public LiveData<String> getText() {
-        return mText;
+    public MutableLiveData<List<Trip>> getTripsLiveData() {
+        return tripsLiveData;
     }
 }

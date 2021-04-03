@@ -51,14 +51,6 @@ public class FloatWidgetService extends Service implements View.OnClickListener 
         noteList = new ArrayList<>();
         noteList.clear();
         noteList = (ArrayList<Note>) intent.getSerializableExtra("notes");
-
-        // noteTwo = intent.getExtras().getString("note2");
-//        for(int i=0;i<noteList.size();i++){
-//            noteTwo+=noteList.get(i).mNoteDescription;
-//            noteTwo+="\n";
-//            Log.d("TAG", "onStartCommand: " + noteTwo);
-//        }
-//        textTwo.setText(noteTwo);
         adapter.changeData(noteList);
         notesRecyclerView.setAdapter(adapter);
         return START_STICKY;

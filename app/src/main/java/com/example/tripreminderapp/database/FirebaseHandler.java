@@ -6,6 +6,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.tripreminderapp.HomeActivity;
+import com.example.tripreminderapp.LoginActivity;
 import com.example.tripreminderapp.database.trip.Trip;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -19,10 +21,8 @@ import java.util.List;
 
 public class FirebaseHandler {
     private Context context;
-    private FirebaseAuth auth = FirebaseAuth.getInstance();
     public OnReceiveDataFroFirebase onReceiveDataFroFirebase;
-    String email = auth.getCurrentUser().getEmail();
-    private String userEmail = email.replace('.','%');
+    private String userEmail = LoginActivity.EMAIL.replace('.','%');
     public FirebaseHandler(Context context) {
         this.context=context;
 
@@ -84,7 +84,7 @@ public class FirebaseHandler {
         deleteAllData();
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference reference = firebaseDatabase.getReference();
-        List<Trip> tripList = TripDatabase.getInstance(context).tripDao().getAll(email);
+        List<Trip> tripList = TripDatabase.getInstance(context).tripDao().getAll(LoginActivity.EMAIL);
         for (int indx = 0; indx < tripList.size(); ++indx) {
             Trip trip = tripList.get(indx);
             reference.child("trips").child(userEmail).push().setValue(trip).addOnCompleteListener(task -> {

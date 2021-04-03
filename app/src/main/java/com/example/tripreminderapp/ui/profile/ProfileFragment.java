@@ -29,7 +29,7 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment
 {
-    ProfileViewModel viewModel;
+    private ProfileViewModel viewModel;
     private FragmentProfileBinding binding;
     private FirebaseUser user =FirebaseAuth.getInstance().getCurrentUser();
 
@@ -41,35 +41,30 @@ public class ProfileFragment extends Fragment
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //Initialize view
+        //view binding
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        //init view model
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
 
-        List<Trip> trips = TripDatabase.getInstance(getActivity()).tripDao().getTripDone(user.getEmail());
+        viewModel.getTripsLiveData().observe(getActivity(),trips -> {
+            updateView(trips);
+        });
 
-        int done=0;
-        int cancel = 0;
-        for (int i =0 ; i <trips.size();i++){
-           if (trips.get(i).isDone())
-               done++;
-       }
-
-       binding.profileTvName.setText(user.getDisplayName());
-       binding.profileTvDoneCount.setText(""+done);
-       binding.profileTvCancelCount.setText(""+(trips.size()-cancel));
 
         Glide
                 .with(getActivity())
                 .load(user.getPhotoUrl())
                 .centerCrop()
                 .into(binding.imageView5);
-        FirebaseHandler  handler=new FirebaseHandler(getActivity());
+
 
         binding.profileTvEmail.setText(LoginActivity.EMAIL);
         binding.profileBtnSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseHandler  handler=new FirebaseHandler(getActivity());
                 handler.syncDataWithFirebaseDatabase();
             }
         });
@@ -77,9 +72,24 @@ public class ProfileFragment extends Fragment
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
+                LoginActivity.EMAIL="";
                 getActivity().startActivity(new Intent(getActivity(),LoginActivity.class));
             }
         });
         return  view;
+    }
+
+    private void updateView(List<Trip> trips) {
+        int done=0;
+        int cancel = 0;
+        for (int i =0 ; i <trips.size();i++){
+            if (trips.get(i).isDone())
+                done++;
+        }
+
+        binding.profileTvName.setText(user.getDisplayName());
+        binding.profileTvDoneCount.setText(""+done);
+        binding.profileTvCancelCount.setText(""+(trips.size()-cancel));
+
     }
 }

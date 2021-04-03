@@ -119,7 +119,7 @@ public class MyService extends Service {
             notification.addAction(hangupAction);
             startForeground(1124, notification.build());
         }
-        return super.onStartCommand(intent, flags, startId);
+        return START_STICKY;
     }
 
     @Override

@@ -147,7 +147,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_Date2"
+        app:layout_constraintTop_toBottomOf="@+id/ed_round_date"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
@@ -160,13 +160,13 @@
         android:text="@string/is_round_trip"
         android:textSize="@dimen/_14ssp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/ed_Date2"
+        app:layout_constraintBottom_toTopOf="@+id/ed_round_date"
         app:layout_constraintEnd_toEndOf="@+id/ed_Date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_Date" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/round_switch"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -177,7 +177,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/ed_Date2"
+        android:id="@+id/ed_round_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_32sdp"
@@ -190,13 +190,13 @@
         android:inputType="date"
         android:padding="@dimen/_10sdp"
         android:paddingRight="@dimen/_8sdp"
-        app:layout_constraintEnd_toStartOf="@+id/ed_Time2"
+        app:layout_constraintEnd_toStartOf="@+id/ed_round_time"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+        app:layout_constraintTop_toBottomOf="@+id/round_switch" />
 
 
     <EditText
-        android:id="@+id/ed_Time2"
+        android:id="@+id/ed_round_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
@@ -211,8 +211,8 @@
         android:padding="@dimen/_10sdp"
         android:paddingLeft="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/ed_Date2"
-        app:layout_constraintTop_toBottomOf="@+id/switch1"
+        app:layout_constraintStart_toEndOf="@id/ed_round_date"
+        app:layout_constraintTop_toBottomOf="@+id/round_switch"
         tools:ignore="RtlCompat" />
 
 

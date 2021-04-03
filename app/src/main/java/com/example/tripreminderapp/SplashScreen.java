@@ -23,10 +23,8 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 try {
                     mapImg.animate().translationY(-1000).setDuration(1000).setStartDelay(100);
-                  //  header.animate().translationX(-1000).setDuration(1000).setStartDelay(100);
                     sleep(1200);
-                  //  startActivity(new Intent(SplashScreen.this, viewPager.class));
-                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SlideActivity.class);
                     startActivity(intent);
                     finish();
                 } catch (InterruptedException e) {

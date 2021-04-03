@@ -27,6 +27,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/details_btn_edit"
             tools:listitem="@layout/item_note" />
+
+        <TextView
+            android:id="@+id/tv_no_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_notes_for_this_trip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="@dimen/_22ssp"
+            android:textColor="@color/red"
+            app:layout_constraintEnd_toEndOf="@+id/details_rv_note"
+            app:layout_constraintStart_toStartOf="@+id/details_rv_note"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </androidx.cardview.widget.CardView>

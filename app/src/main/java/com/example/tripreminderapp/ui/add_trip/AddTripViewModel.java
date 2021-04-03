@@ -45,5 +45,4 @@ public class AddTripViewModel extends AndroidViewModel {
     public MutableLiveData<Boolean> getIsInsertedLiveData() {
         return isInsertedLiveData;
     }
-
 }

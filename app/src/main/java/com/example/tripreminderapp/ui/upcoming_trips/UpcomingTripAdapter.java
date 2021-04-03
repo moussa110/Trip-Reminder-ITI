@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -122,8 +123,8 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
         TextView endPointTv;
         TextView timeTv;
         TextView dateTv;
-        Button addNoteBtn;
-        ImageView startBtn;
+        ImageButton addNoteBtn;
+        Button startBtn;
         Button deleteBtn;
 
         public ViewHolder(@NonNull View itemView) {

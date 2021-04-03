@@ -1,9 +1,11 @@
 package com.example.tripreminderapp.ui.upcoming_trips;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -57,7 +60,6 @@ public class UpcomingTripsFragment extends Fragment {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentUpcomingBinding.inflate(inflater, container, false);
@@ -139,7 +141,6 @@ public class UpcomingTripsFragment extends Fragment {
         return view;
     }
 
-
     public void showAddNoteDialog(int id) {
         LayoutInflater factory = LayoutInflater.from(getActivity());
         View view = factory.inflate(R.layout.dialog_add_note, null);
@@ -185,8 +186,6 @@ public class UpcomingTripsFragment extends Fragment {
             startActivity(intent);
         }
     }
-
-
     //show dialog to history
     public void showTripDialog(Trip trip) {
         LayoutInflater factory = LayoutInflater.from(getActivity());
@@ -196,7 +195,16 @@ public class UpcomingTripsFragment extends Fragment {
         view.findViewById(R.id.btn_okay).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), R.string.OK, Toast.LENGTH_SHORT).show();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(getContext())) {
+                    Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                            Uri.parse("package:" + getActivity().getPackageName()));
+                    startActivityForResult(intent, 106);
+                } else {
+                    Intent startIntent = new Intent(getContext(), FloatWidgetService.class);
+                    startIntent.putExtra("notes", (ArrayList<Note>) TripDatabase.getInstance(getActivity()).noteDao().getNotes(trip.getId()));
+                    getActivity().startService(startIntent);
+                }
+                
                 DisplayTrack(trip.getEndPoint());
                 trip.setDone(true);
                 tripsViewModel.updateTrip(trip);
@@ -206,6 +214,7 @@ public class UpcomingTripsFragment extends Fragment {
 
         addToHistory.show();
     }
+
 
     public void showDeleteDialog(Trip trip){
         LayoutInflater factory = LayoutInflater.from(getActivity());

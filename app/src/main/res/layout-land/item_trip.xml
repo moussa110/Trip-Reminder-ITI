@@ -10,8 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/lightBlueTransparent">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/item_tv_name"
@@ -19,7 +18,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_2sdp"
             android:gravity="center"
-            android:padding="@dimen/_8sdp"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
@@ -32,7 +30,6 @@
             android:id="@+id/view1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6sdp"
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="2"
@@ -69,11 +66,10 @@
             android:id="@+id/viw2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6sdp"
             android:layout_marginRight="@dimen/_5sdp"
             android:orientation="vertical"
             android:weightSum="2"
-            app:layout_constraintEnd_toStartOf="@id/item_btn_start"
+            app:layout_constraintEnd_toStartOf="@id/item_btn_add_notes"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view1">
 
@@ -122,38 +118,33 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_cancel"
-                android:drawablePadding="@dimen/_10sdp"
-                android:padding="@dimen/_10sdp"
-                android:text="@string/cancel"
+                android:padding="@dimen/_8sdp"
+                android:text="@android:string/cancel"
                 android:textStyle="bold"
                 app:backgroundTint="#C65353" />
 
             <Button
-                android:id="@+id/item_btn_add_notes"
+                android:id="@+id/item_btn_start"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:background="@drawable/round_border"
-                android:drawablePadding="@dimen/_10sdp"
-                android:padding="@dimen/_10sdp"
-                android:text="@string/Add_notes"
+                android:padding="@dimen/_8sdp"
+                android:text="@string/start"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/item_btn_start"
-            android:layout_width="0dp"
+        <ImageButton
+            android:layout_marginRight="@dimen/_4sdp"
+            android:id="@+id/item_btn_add_notes"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:background="@drawable/ic_video_play_button"
-            android:text="@string/start"
-            app:layout_constraintBottom_toBottomOf="@id/viw2"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/notee"
+            app:layout_constraintBottom_toBottomOf="@+id/viw2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/viw2" />
+            app:layout_constraintTop_toTopOf="@+id/viw2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

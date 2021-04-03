@@ -10,8 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#31C3E6FC">
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/item_tv_name"
             android:layout_width="0dp"
@@ -33,7 +32,7 @@
             android:layout_height="@dimen/_16sdp"
             android:layout_marginTop="16dp"
             android:text="@string/Done"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/holo_red_dark"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -82,7 +81,6 @@
             android:layout_marginTop="@dimen/_6sdp"
             android:orientation="vertical"
             android:weightSum="2"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view1">
 
@@ -116,39 +114,41 @@
             android:id="@+id/viw3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
             android:layout_marginRight="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            app:layout_constraintTop_toBottomOf="@id/viw2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:orientation="vertical"
+            android:weightSum="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/viw2"
+            app:layout_constraintTop_toTopOf="@+id/viw2">
 
             <Button
                 android:id="@+id/delete_trip"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:layout_weight="1"
                 android:drawablePadding="@dimen/_10sdp"
                 android:padding="@dimen/_10sdp"
-                android:text="cancel"
+                android:text="@string/delete"
                 android:textStyle="bold"
                 app:backgroundTint="#C65353" />
 
-            <Button
-                android:id="@+id/item_btn_add_notes"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/_10sdp"
-                android:padding="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:text="Show Notes"
-                android:textStyle="bold" />
+
         </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/item_btn_add_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/notee"
+            android:drawablePadding="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/viw3"
+            app:layout_constraintEnd_toEndOf="@+id/viw3" />
 
 
 

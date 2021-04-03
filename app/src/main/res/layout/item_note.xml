@@ -18,15 +18,16 @@
             android:id="@+id/imageView4"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
+            android:layout_marginRight="@dimen/_4sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/add" />
+            app:srcCompat="@drawable/notee" />
 
         <TextView
             android:id="@+id/tv_note_item_tilte"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
+            app:layout_goneMarginLeft="@dimen/_4sdp"
             android:text="tiltle1"
             android:textSize="@dimen/_16ssp"
             android:textStyle="bold"
@@ -39,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
             android:text="description"
             android:textSize="@dimen/_16ssp"
             android:textStyle="italic"

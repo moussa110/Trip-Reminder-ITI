@@ -19,10 +19,10 @@
 
         <ImageView
             android:id="@+id/collapsed_iv"
-            android:layout_width="@dimen/_70sdp"
-            android:layout_height="@dimen/_70sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:src="@drawable/add" />
+            android:layout_width="@dimen/_64sdp"
+            android:layout_height="@dimen/_64sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:src="@drawable/note" />
 
         <ImageView
             android:id="@+id/buttonClose"
@@ -37,7 +37,7 @@
         android:id="@+id/layoutExpanded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#20a0c3d7"
+        android:background="#00A0C3D7"
         android:orientation="horizontal"
         android:padding="@dimen/_8sdp"
         android:visibility="gone"

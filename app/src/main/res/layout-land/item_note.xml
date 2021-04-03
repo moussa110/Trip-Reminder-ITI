@@ -20,7 +20,7 @@
             android:layout_height="@dimen/_50sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/add" />
+            app:srcCompat="@drawable/notee" />
 
         <TextView
             android:id="@+id/tv_note_item_tilte"
