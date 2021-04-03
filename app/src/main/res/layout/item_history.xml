@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     app:cardMaxElevation="@dimen/_10sdp"
     android:layout_margin="@dimen/_5sdp"
+    app:cardCornerRadius="@dimen/_10sdp"
     android:elevation="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +15,6 @@
         <TextView
             android:id="@+id/item_tv_name"
             android:layout_width="0dp"
-            android:padding="@dimen/_8sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_2sdp"
             android:textStyle="bold"
@@ -32,6 +32,7 @@
             android:layout_height="@dimen/_16sdp"
             android:layout_marginTop="16dp"
             android:text="@string/Done"
+            android:gravity="center"
             android:textColor="@android:color/holo_red_dark"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +45,6 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:weightSum="2"
-            android:layout_marginTop="@dimen/_2sdp"
             app:layout_constraintTop_toBottomOf="@id/item_tv_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_calendar"
                 android:drawablePadding="8dp"
-                android:padding="10dp"
+                android:padding="@dimen/_5sdp"
                 android:layout_marginRight="@dimen/_4sdp"
                 tools:text="Apr 2, 2021"
                 android:textStyle="bold"
@@ -68,19 +68,18 @@
                 android:layout_marginLeft="@dimen/_4sdp"
                 android:drawableStart="@drawable/ic_clock"
                 android:drawablePadding="@dimen/_10sdp"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
                 android:text="8:20"
                 android:textStyle="bold"
                 android:drawableLeft="@drawable/ic_clock" />
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/viw2"
-            android:layout_width="391dp"
-            android:layout_height="97dp"
-            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:weightSum="2"
+            app:layout_constraintEnd_toStartOf="@id/item_btn_add_notes"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view1">
 
@@ -92,7 +91,7 @@
                 android:drawableLeft="@drawable/ic_marker_start"
                 android:drawablePadding="@dimen/_10sdp"
                 android:maxLines="2"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
                 android:textStyle="bold"
                 tools:text="cairo, alex, tanta" />
 
@@ -104,7 +103,7 @@
                 android:drawableLeft="@drawable/ic_marker_end"
                 android:drawablePadding="@dimen/_10sdp"
                 android:maxLines="2"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
                 android:text="cairo, alex, tanta"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -114,17 +113,19 @@
             android:id="@+id/viw3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/_5sdp"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/_2sdp"
             android:weightSum="2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/viw2"
-            app:layout_constraintTop_toTopOf="@+id/viw2">
+            android:layout_marginRight="@dimen/_5sdp"
+
+            app:layout_constraintTop_toBottomOf="@id/viw2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
             <Button
                 android:id="@+id/delete_trip"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_5sdp"
@@ -134,21 +135,21 @@
                 android:text="@string/delete"
                 android:textStyle="bold"
                 app:backgroundTint="#C65353" />
-
-
         </LinearLayout>
 
         <ImageButton
             android:id="@+id/item_btn_add_notes"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@drawable/notee"
             android:drawablePadding="@dimen/_10sdp"
             android:padding="@dimen/_10sdp"
+            android:text="@string/Show_Notes"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/viw3"
-            app:layout_constraintEnd_toEndOf="@+id/viw3" />
+            app:layout_constraintBottom_toBottomOf="@+id/viw2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view1" />
 
 
 

@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/_250sdp"
     android:layout_height="wrap_content"
     app:cardMaxElevation="@dimen/_10sdp"
     android:layout_margin="@dimen/_5sdp"
@@ -15,7 +15,6 @@
         <TextView
             android:id="@+id/item_tv_name"
             android:layout_width="0dp"
-            android:padding="@dimen/_4sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_2sdp"
             android:textStyle="bold"
@@ -46,7 +45,6 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:weightSum="2"
-            android:layout_marginTop="@dimen/_2sdp"
             app:layout_constraintTop_toBottomOf="@id/item_tv_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -57,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_calendar"
                 android:drawablePadding="8dp"
-                android:padding="10dp"
+                android:padding="@dimen/_5sdp"
                 android:layout_marginRight="@dimen/_4sdp"
                 tools:text="Apr 2, 2021"
                 android:textStyle="bold"
@@ -70,7 +68,7 @@
                 android:layout_marginLeft="@dimen/_4sdp"
                 android:drawableStart="@drawable/ic_clock"
                 android:drawablePadding="@dimen/_10sdp"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
                 android:text="8:20"
                 android:textStyle="bold"
                 android:drawableLeft="@drawable/ic_clock" />
@@ -93,7 +91,7 @@
                 android:drawableLeft="@drawable/ic_marker_start"
                 android:drawablePadding="@dimen/_10sdp"
                 android:maxLines="2"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
                 android:textStyle="bold"
                 tools:text="cairo, alex, tanta" />
 
@@ -105,7 +103,7 @@
                 android:drawableLeft="@drawable/ic_marker_end"
                 android:drawablePadding="@dimen/_10sdp"
                 android:maxLines="2"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_5sdp"
                 android:text="cairo, alex, tanta"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -141,8 +139,8 @@
 
         <ImageButton
             android:id="@+id/item_btn_add_notes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_weight="1"
             android:background="@drawable/notee"
             android:drawablePadding="@dimen/_10sdp"

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="130dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <LinearLayout
@@ -19,23 +20,26 @@
                 android:id="@+id/tripName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
                 android:padding="5dp"
-                android:text="Caller's Name" />
+                tools:text="Caller's Name" />
 
             <TextView
                 android:id="@+id/tripEndPoint"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="-10dp"
-                android:padding="5dp"
-                android:text="Incoming Call" />
+                android:maxLines="2"
+                android:textSize="@dimen/_14ssp"
+                android:layout_marginLeft="@dimen/_8sdp"
+                tools:text="Incoming Call" />
         </LinearLayout>
 
 
         <ImageView
             android:id="@+id/photo"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:src="@drawable/ic_alarm_clock" />
 
     </LinearLayout>
@@ -50,23 +54,23 @@
         <Button
             android:id="@+id/btnDismiss"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
             android:layout_weight="0.5"
-            android:backgroundTint="@color/colorPrimary"
-            android:text="dismiss"
+            android:backgroundTint="@color/red"
+            android:text="@string/Dismiss"
             android:textColor="@color/white" />
 
         <Button
             android:id="@+id/btnStart"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginLeft="5dp"
             android:layout_weight="0.5"
             android:backgroundTint="@color/colorPrimary"
-            android:text="start"
+            android:text="@string/start"
             android:textColor="@color/white" />
 
     </LinearLayout>

@@ -24,16 +24,13 @@ import java.util.List;
 
 public class FloatWidgetService extends Service implements View.OnClickListener {
 
-    public static final String BROADCAST_ACTION = "magicbox";
-    private static final int MAX_CLICK_DURATION = 200;
+
     NotesAdapter adapter;
     RecyclerView notesRecyclerView;
-    TextView textTwo;
     private WindowManager mWindowManager;
     private View mFloatingWidget;
     private View collapsedView;
     private View expandedView;
-    private String noteTwo = "text";
     private List<Note> noteList;
     private long startClickTime;
 
@@ -73,7 +70,7 @@ public class FloatWidgetService extends Service implements View.OnClickListener 
 
         params.gravity = Gravity.TOP | Gravity.LEFT;
         params.x = 0;
-        params.y = 100;
+        params.y = 600;
 
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         mWindowManager.addView(mFloatingWidget, params);
@@ -159,11 +156,4 @@ public class FloatWidgetService extends Service implements View.OnClickListener 
         }
     }
 
-//    public void setNoteOne(String noteOne) {
-//        this.noteOne = noteOne;
-//    }
-
-    public void setNoteTwo(String noteTwo) {
-        this.noteTwo = noteTwo;
-    }
 }

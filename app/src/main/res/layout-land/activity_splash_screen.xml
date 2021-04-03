@@ -28,15 +28,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topView" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_32sdp"
+        android:layout_marginBottom="@dimen/_32sdp"
+        android:background="@drawable/applogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
     <TextView
         android:id="@+id/tripApp"
-        android:layout_width="538dp"
-        android:layout_height="67dp"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_24sdp"
         android:layout_marginLeft="@dimen/_24sdp"
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_24sdp"
         android:layout_marginRight="@dimen/_24sdp"
+        android:fontFamily="@font/coiny"
         android:text="@string/app"
         android:textColor="#FFFFFF"
         android:textSize="@dimen/_45ssp"
@@ -46,22 +58,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="@dimen/_50sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_marginStart="@dimen/_32sdp"
-        android:layout_marginLeft="@dimen/_32sdp"
-        android:layout_marginTop="@dimen/_32sdp"
-        android:layout_marginEnd="@dimen/_32sdp"
-        android:layout_marginRight="@dimen/_32sdp"
-        android:layout_marginBottom="@dimen/_32sdp"
-        android:background="@drawable/map"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2"
-        app:layout_constraintVertical_bias="0.749"
-        tools:srcCompat="@tools:sample/avatars" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -87,12 +87,10 @@ public class MyService extends Service {
             notification.setContentTitle("reminder");
             notification.setTicker("Call_STATUS");
             notification.setContentText("IncomingCall");
-            notification.setSmallIcon(R.drawable.add);
-            notification.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
+            notification.setSmallIcon(R.drawable.applogo);
             notification.setCategory(NotificationCompat.CATEGORY_CALL);
             notification.setVibrate(null);
             notification.setOngoing(true);
-            notification.setSound(soundUri);
             notification.setFullScreenIntent(pendingIntent, true);
             notification.setPriority(NotificationCompat.PRIORITY_HIGH);
             notification.setStyle(new NotificationCompat.DecoratedCustomViewStyle());
@@ -105,7 +103,7 @@ public class MyService extends Service {
             notification.setContentTitle("app_name");
             notification.setTicker("Call_STATUS");
             notification.setContentText("IncomingCall");
-            notification.setSmallIcon(R.drawable.add);
+            notification.setSmallIcon(R.drawable.applogo);
             notification.setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.drawable.add));
             notification.setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
             notification.setVibrate(null);

@@ -19,9 +19,9 @@
 
         <ImageView
             android:id="@+id/collapsed_iv"
-            android:layout_width="@dimen/_64sdp"
-            android:layout_height="@dimen/_64sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:src="@drawable/note" />
 
         <ImageView
@@ -35,7 +35,7 @@
     <!-- this is the expanded layout -->
     <LinearLayout
         android:id="@+id/layoutExpanded"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#00A0C3D7"
         android:orientation="horizontal"
@@ -46,20 +46,21 @@
 
         <ImageView
             android:id="@+id/buttonSimplifiedCodingExpanded"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_80sdp"
-            android:src="@drawable/add"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:src="@drawable/note"
             tools:ignore="ContentDescription" />
 
         <LinearLayout
             android:id="@+id/buttonSimplifiedCoding"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/lightBlueTransparent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/notesRecyclerView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/item_note"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

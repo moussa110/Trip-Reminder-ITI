@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">TripReminderApp</string>
+    <string name="app_name">Tripme</string>
     <string name="account">لديك حساب؟</string>
     <string name="E_mail">البريد الالكترونى</string>
     <string name="Password">كلمه السر</string>
@@ -71,5 +71,6 @@
     <string name="Logout">خروج</string>
     <string name="Trip_done">الرحلات التامه</string>
     <string name="Trip_cancel">الرحلات الملغيه</string>
-    <string name="no_notes_for_this_trip">no notes for this trip</string>
+    <string name="no_notes_for_this_trip">لا توجد ملاحظات </string>
+    <string name="history">الرحلات السابقة</string>
 </resources>

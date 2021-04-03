@@ -35,7 +35,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Trip" />
+            android:hint="@string/Trip"
+            android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,8 +62,12 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawableLeft="@drawable/search"
+            android:drawablePadding="@dimen/_5sdp"
             android:focusable="false"
-            android:hint="@string/Start" />
+            android:hint="@string/Start"
+            android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -88,8 +93,12 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:drawablePadding="@dimen/_5sdp"
             android:focusable="false"
-            android:hint="@string/End" />
+            android:hint="@string/End"
+            android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,11 +109,13 @@
         android:layout_marginStart="@dimen/_32sdp"
         android:layout_marginTop="@dimen/_15sdp"
         android:background="@drawable/rounded_for_date_time"
+        android:drawableStart="@drawable/ic_baseline_date_range_24"
+        android:drawablePadding="@dimen/_10sdp"
         android:focusable="false"
         android:hint="@string/Date"
         android:inputType="date"
         android:padding="@dimen/_10sdp"
-        android:paddingRight="@dimen/_8sdp"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/ed_Time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ed_endPoint"
@@ -119,12 +130,15 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_32sdp"
         android:background="@drawable/rounded_for_date_time"
+        android:drawableStart="@drawable/ic_baseline_access_time_24"
+        android:drawablePadding="@dimen/_10sdp"
         android:ems="10"
         android:focusable="false"
         android:hint="@string/Time"
         android:inputType="time"
         android:padding="@dimen/_10sdp"
         android:paddingLeft="@dimen/_8sdp"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ed_Date"
         app:layout_constraintTop_toBottomOf="@+id/ed_endPoint"
@@ -184,12 +198,16 @@
         android:layout_marginLeft="@dimen/_32sdp"
         android:layout_marginTop="@dimen/_12sdp"
         android:background="@drawable/rounded_for_date_time"
+        android:drawableStart="@drawable/ic_baseline_date_range_24"
+        android:drawableLeft="@drawable/ic_baseline_date_range_24"
+        android:drawablePadding="@dimen/_10sdp"
         android:focusable="false"
-        android:visibility="gone"
         android:hint="@string/Date"
         android:inputType="date"
         android:padding="@dimen/_10sdp"
         android:paddingRight="@dimen/_8sdp"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/ed_round_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/round_switch" />
@@ -203,13 +221,17 @@
         android:layout_marginTop="@dimen/_12sdp"
         android:layout_marginEnd="@dimen/_32sdp"
         android:background="@drawable/rounded_for_date_time"
+        android:drawableStart="@drawable/ic_baseline_access_time_24"
+
+        android:drawablePadding="@dimen/_10sdp"
         android:ems="10"
-        android:visibility="gone"
         android:focusable="false"
         android:hint="@string/Time"
         android:inputType="time"
         android:padding="@dimen/_10sdp"
         android:paddingLeft="@dimen/_8sdp"
+        android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/ed_round_date"
         app:layout_constraintTop_toBottomOf="@+id/round_switch"

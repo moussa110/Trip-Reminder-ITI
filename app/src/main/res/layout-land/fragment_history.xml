@@ -6,31 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".ui.history.HistoryFragment">
 
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/history"
+        android:fontFamily="@font/coiny"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="@dimen/_18ssp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/home_btn_addTrip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_32sdp"
-        android:layout_marginBottom="@dimen/_32sdp"
+
+        android:layout_marginRight="@dimen/_8sdp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimary"
         android:clickable="true"
         android:focusable="true"
-        app:backgroundTint="@color/colorPrimary"
         android:tint="@android:color/white"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:layout_marginRight="@dimen/_32sdp" />
+        app:srcCompat="@android:drawable/ic_dialog_map"
+        app:tint= "@color/white"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dash_rv_trip"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_height="0dp"
+        android:foregroundGravity="center"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/dash_trip" />
+        app:layout_constraintTop_toBottomOf="@id/tv1"
+        tools:listitem="@layout/item_history" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

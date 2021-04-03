@@ -10,27 +10,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.tripreminderapp.GeoLocation;
 import com.example.tripreminderapp.R;
 import com.example.tripreminderapp.database.TripDatabase;
 import com.example.tripreminderapp.database.note.Note;
 import com.example.tripreminderapp.database.trip.Trip;
-import com.example.tripreminderapp.databinding.FragmentDashboardBinding;
+import com.example.tripreminderapp.databinding.FragmentHistoryBinding;
 import com.example.tripreminderapp.ui.trip_details.NotesAdapter;
-import com.example.tripreminderapp.ui.trip_details.TripDetailsActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
 public class HistoryFragment extends Fragment {
-    private FragmentDashboardBinding binding;
+    private FragmentHistoryBinding binding;
     private  final HistoryAdapter historyAdapter = new HistoryAdapter();
     private FirebaseAuth auth =FirebaseAuth.getInstance();
     private NotesAdapter notesAdapter = new NotesAdapter();
@@ -45,7 +42,7 @@ public class HistoryFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentHistoryBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         historyViewModel = new ViewModelProvider(this).get(HistoryViewModel.class);
 

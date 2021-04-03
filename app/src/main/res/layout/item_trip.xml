@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_marker_start"
                 android:drawablePadding="@dimen/_10sdp"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_3sdp"
                 tools:text="cairo, alex, tanta"
                 android:maxLines="2"
                 android:textStyle="bold"
@@ -92,7 +92,7 @@
                 android:drawableStart="@drawable/ic_marker_end"
                 android:maxLines="2"
                 android:drawablePadding="@dimen/_10sdp"
-                android:padding="@dimen/_10sdp"
+                android:padding="@dimen/_3sdp"
                 android:text="cairo, alex, tanta"
                 android:textStyle="bold"
                 android:drawableLeft="@drawable/ic_marker_end" />
@@ -137,8 +137,8 @@
         <ImageButton
             android:layout_marginRight="@dimen/_4sdp"
             android:id="@+id/item_btn_add_notes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:padding="@dimen/_10sdp"
             android:background="@drawable/notee"
             app:layout_constraintBottom_toBottomOf="@+id/viw2"

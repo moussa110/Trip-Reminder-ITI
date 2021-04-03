@@ -21,6 +21,7 @@
             android:layout_marginRight="@dimen/_4sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/notee"
             app:srcCompat="@drawable/notee" />
 
         <TextView
@@ -39,16 +40,16 @@
             android:id="@+id/tv_note_item_desc"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_1sdp"
             android:text="description"
             android:textSize="@dimen/_16ssp"
             android:textStyle="italic"
+            android:layout_marginEnd="@dimen/_20sdp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-            android:layout_marginRight="@dimen/_4sdp"
             app:layout_constraintStart_toStartOf="@+id/tv_note_item_tilte"
             app:layout_constraintEnd_toStartOf="@+id/iv_item_note_delete"
-            app:layout_constraintTop_toBottomOf="@+id/tv_note_item_tilte" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_note_item_tilte"
+            tools:ignore="RtlCompat" />
 
         <ImageView
             android:id="@+id/iv_item_note_delete"

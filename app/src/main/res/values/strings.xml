@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">TripReminderApp</string>
+    <string name="app_name">Tripme</string>
     <string name="account">Already Have An Account?</string>
     <string name="E_mail">email address</string>
     <string name="Password">password</string>
@@ -73,4 +73,5 @@
     <string name="Trip_done">Trips done</string>
     <string name="Trip_cancel">Trips cancel</string>
     <string name="no_notes_for_this_trip">no notes for this trip</string>
+    <string name="history">history</string>
 </resources>

@@ -5,39 +5,18 @@
     android:id="@+id/constraintlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightBlueTransparent"
     tools:context=".ui.profile.ProfileFragment" >
-
-  <View
-        android:id="@+id/topView"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_90sdp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-  <View
-      android:id="@+id/view2"
-      android:layout_width="0dp"
-      android:layout_height="@dimen/_90sdp"
-      android:background="@drawable/wave"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/topView" />
 
 
   <de.hdodenhof.circleimageview.CircleImageView
       android:id="@+id/imageView5"
       android:layout_width="@dimen/_120sdp"
       android:layout_height="@dimen/_120sdp"
-      android:layout_marginStart="@dimen/_32sdp"
-      android:layout_marginLeft="@dimen/_32sdp"
       android:layout_marginTop="@dimen/_18sdp"
-      android:layout_marginEnd="@dimen/_32sdp"
-      android:layout_marginRight="@dimen/_32sdp"
       android:background="@drawable/ic_user"
-      app:layout_constraintEnd_toEndOf="@+id/topView"
+      app:civ_border_color="@color/colorPrimary"
+      app:civ_border_width="@dimen/_5sdp"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
 
@@ -155,7 +134,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginStart="@dimen/_32sdp"
-      android:layout_marginTop="@dimen/_12sdp"
+      android:layout_marginTop="@dimen/_4sdp"
       android:layout_marginEnd="@dimen/_32sdp"
       android:drawableLeft="@drawable/ic_logout"
       android:drawablePadding="@dimen/_10sdp"
@@ -177,12 +156,12 @@
       android:padding="@dimen/_8sdp"
       android:drawableStart="@drawable/ic_baseline_person_24"
       android:drawablePadding="@dimen/_8sdp"
-      android:fontFamily="casual"
+      android:fontFamily="@font/coiny"
+      android:textAllCaps="true"
       android:text="user name"
       android:textColor="@color/red"
       android:textSize="24sp"
       android:textStyle="bold"
-      android:typeface="sans"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/imageView5"

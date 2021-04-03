@@ -8,31 +8,14 @@
     android:background="@color/lightBlueTransparent"
     tools:context=".ui.profile.ProfileFragment">
 
-    <View
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/topView"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_80sdp"
-        android:background="@color/colorPrimary" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="731dp"
-        android:layout_height="@dimen/_80sdp"
-        android:background="@drawable/wave"
-        app:layout_constraintTop_toBottomOf="@id/topView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="130dp" />
-
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView5"
         android:layout_width="@dimen/_90sdp"
         android:layout_height="@dimen/_90sdp"
         android:background="@drawable/ic_user"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_50sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,21 +27,22 @@
         android:drawableStart="@drawable/ic_email"
         android:drawableLeft="@drawable/ic_email"
         android:drawablePadding="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_40sdp"
         android:gravity="center"
         android:padding="@dimen/_8sdp"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2"
-        tools:text="moussam760@gmail.com" />
-
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="moussam760@gmail.com"
+        tools:ignore="RtlCompat" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginTop="@dimen/_50sdp"
         android:drawableStart="@drawable/ic_next"
         android:drawableLeft="@drawable/ic_email"
         android:drawablePadding="@dimen/_10sdp"
@@ -67,9 +51,23 @@
         android:text="@string/Trip_done"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintEnd_toStartOf="@+id/profile_tv_done_count"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintStart_toStartOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <Button
+        android:id="@+id/profile_btn_sync"
+        android:layout_width="272dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_cloud_sync"
+        android:drawablePadding="@dimen/_10sdp"
+        android:gravity="center"
+        android:padding="@dimen/_8sdp"
+        android:text="@string/sync"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp"
+        app:backgroundTint="#A9DBFA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
         android:id="@+id/profile_tv_done_count"
@@ -80,31 +78,37 @@
         android:padding="@dimen/_8sdp"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2"
-        tools:text="0" />
+        android:layout_marginStart="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        tools:text="0"
+        tools:ignore="RtlCompat" />
+
 
     <TextView
         android:id="@+id/profile_tv_cancel_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:drawablePadding="@dimen/_10sdp"
         android:gravity="center"
         android:padding="@dimen/_8sdp"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_tv_done_count"
-        tools:text="0" />
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintStart_toEndOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:text="0"
+        tools:ignore="RtlCompat" />
 
     <TextView
 
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:drawableStart="@drawable/ic_back"
         android:drawableLeft="@drawable/ic_back"
         android:drawablePadding="@dimen/_10sdp"
@@ -113,62 +117,42 @@
         android:text="@string/Trip_cancel"
         android:textColor="@color/black"
         android:textSize="@dimen/_14ssp"
-        app:layout_constraintBottom_toBottomOf="@+id/profile_tv_cancel_count"
-        app:layout_constraintEnd_toStartOf="@+id/profile_tv_cancel_count"
-        app:layout_constraintTop_toTopOf="@+id/profile_tv_cancel_count" />
-
-
-    <Button
-        android:id="@+id/profile_btn_sync"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_22sdp"
-        android:drawableLeft="@drawable/ic_cloud_sync"
-        android:drawablePadding="@dimen/_10sdp"
-        android:gravity="center"
-        android:padding="@dimen/_8sdp"
-        android:text="@string/sync"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_14ssp"
-        app:backgroundTint="#A9DBFA"
-        app:layout_constraintEnd_toEndOf="@+id/profile_tv_email"
-        app:layout_constraintStart_toStartOf="@+id/profile_tv_email"
-        app:layout_constraintTop_toBottomOf="@+id/profile_tv_email" />
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/profile_btn_log_out"
-        android:layout_width="0dp"
+        android:layout_width="272dp"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_logout"
         android:drawablePadding="@dimen/_10sdp"
         android:gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
         android:padding="@dimen/_8sdp"
         android:text="@string/logout"
         android:textColor="@color/white"
         android:textSize="@dimen/_14ssp"
         app:backgroundTint="@color/red"
-        app:layout_constraintEnd_toEndOf="@+id/profile_btn_sync"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_btn_sync" />
 
     <TextView
         android:id="@+id/profile_tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:drawableStart="@drawable/ic_baseline_person_24"
         android:drawableLeft="@drawable/ic_baseline_person_24"
         android:drawablePadding="@dimen/_8sdp"
-        android:fontFamily="casual"
+        android:fontFamily="@font/coiny"
         android:padding="@dimen/_8sdp"
         android:text="user name"
         android:textColor="@color/red"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:typeface="sans"
-        app:layout_constraintEnd_toEndOf="@+id/topView"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/profile_tv_email"
+        app:layout_constraintStart_toStartOf="@+id/profile_tv_email"
+        app:layout_constraintTop_toBottomOf="@+id/profile_tv_email" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

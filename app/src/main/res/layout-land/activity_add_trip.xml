@@ -34,7 +34,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/Trip" />
+            android:hint="@string/Trip"
+            android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,8 +60,12 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawableLeft="@drawable/search"
+            android:drawablePadding="@dimen/_5sdp"
             android:focusable="false"
-            android:hint="@string/Start" />
+            android:hint="@string/Start"
+            android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,8 +91,12 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_search_24"
+            android:drawableLeft="@drawable/search"
+            android:drawablePadding="@dimen/_5sdp"
             android:focusable="false"
-            android:hint="@string/End" />
+            android:hint="@string/End"
+            android:textColor="#FFFFFF" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +105,7 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_150sdp"
         app:layout_constraintTop_toBottomOf="@id/view2"
         app:layout_constraintStart_toEndOf="@id/ed_name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -109,34 +118,43 @@
             android:orientation="horizontal"
             android:paddingBottom="@dimen/_8sdp"
             android:layout_weight="2">
+
             <EditText
                 android:id="@+id/ed_Date"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:layout_marginStart="@dimen/_4sdp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_weight="1"
                 android:background="@drawable/rounded_for_date_time"
+                android:drawableStart="@drawable/ic_baseline_date_range_24"
+                android:drawableLeft="@drawable/ic_baseline_date_range_24"
+                android:drawablePadding="@dimen/_10sdp"
                 android:focusable="false"
                 android:hint="@string/Date"
                 android:inputType="date"
                 android:padding="@dimen/_10sdp"
-                android:paddingRight="@dimen/_8sdp"/>
+                android:paddingRight="@dimen/_8sdp"
+                android:textColor="#FFFFFF" />
 
 
             <EditText
                 android:id="@+id/ed_Time"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_for_date_time"
-                android:ems="10"
-                android:layout_marginEnd="@dimen/_4sdp"
                 android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_for_date_time"
+                android:drawableStart="@drawable/ic_baseline_access_time_24"
+                android:drawableLeft="@drawable/ic_baseline_access_time_24"
+                android:drawablePadding="@dimen/_10sdp"
+                android:ems="10"
                 android:focusable="false"
                 android:hint="@string/Time"
                 android:inputType="time"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_10sdp"
+                android:textColor="#FFFFFF" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -173,36 +191,45 @@
             android:paddingTop="@dimen/_8sdp"
             android:orientation="horizontal"
             android:layout_weight="2">
+
             <EditText
                 android:id="@+id/ed_round_date"
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:layout_marginStart="@dimen/_4sdp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_weight="1"
                 android:background="@drawable/rounded_for_date_time"
+                android:drawableStart="@drawable/ic_baseline_date_range_24"
+                android:drawableLeft="@drawable/ic_baseline_date_range_24"
+                android:drawablePadding="@dimen/_8sdp"
                 android:focusable="false"
-                android:visibility="gone"
                 android:hint="@string/Date"
                 android:inputType="date"
                 android:padding="@dimen/_10sdp"
-                android:paddingRight="@dimen/_8sdp"/>
+                android:paddingRight="@dimen/_8sdp"
+                android:textColor="#FFFFFF"
+                android:visibility="gone" />
 
 
             <EditText
                 android:id="@+id/ed_round_time"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rounded_for_date_time"
-                android:ems="10"
-                android:visibility="gone"
-                android:layout_marginEnd="@dimen/_4sdp"
                 android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_for_date_time"
+                android:drawableStart="@drawable/ic_baseline_access_time_24"
+                android:drawableLeft="@drawable/ic_baseline_access_time_24"
+                android:drawablePadding="@dimen/_10sdp"
+                android:ems="10"
                 android:focusable="false"
                 android:hint="@string/Time"
                 android:inputType="time"
-                android:padding="@dimen/_10sdp" />
+                android:padding="@dimen/_10sdp"
+                android:textColor="#FFFFFF"
+                android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
 

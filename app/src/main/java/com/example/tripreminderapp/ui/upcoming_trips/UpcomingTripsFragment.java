@@ -16,8 +16,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -151,7 +149,7 @@ public class UpcomingTripsFragment extends Fragment {
         view.findViewById(R.id.btn_add_note).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "" + title.getEditText().getText(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "note added ☺", Toast.LENGTH_SHORT).show();
                 TripDatabase.getInstance(getActivity()).noteDao().insertNote(new Note(id, title.getEditText().getText().toString(), description.getEditText().getText().toString()));
                 addNoteDialog.dismiss();
             }

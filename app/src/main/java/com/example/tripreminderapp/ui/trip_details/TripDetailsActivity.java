@@ -270,7 +270,7 @@ public class TripDetailsActivity extends AppCompatActivity {
             binding.edEndPoint.getEditText().setText(place.getAddress());
         } else {
             //Status status = Autocomplete.getStatusFromIntent(data);
-            Toast.makeText(this, "error  ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "check network connection", Toast.LENGTH_SHORT).show();
         }
     }
     public void displayTrack( String sDestination) {

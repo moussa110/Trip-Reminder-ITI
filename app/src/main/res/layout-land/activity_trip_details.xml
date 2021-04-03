@@ -24,7 +24,6 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginLeft="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_8sdp"
-
         app:boxCornerRadiusBottomEnd="@dimen/_100sdp"
         app:boxCornerRadiusBottomStart="@dimen/_100sdp"
         app:boxCornerRadiusTopEnd="@dimen/_100sdp"
