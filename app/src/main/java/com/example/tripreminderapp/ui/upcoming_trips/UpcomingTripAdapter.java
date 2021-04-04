@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,8 +21,8 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
     public List<Trip> data = null;
 
     //Mido
-    public StartTrip setStartTrip = null;
-    public DeletTrip setDeletTrip = null;
+    public StartTripListener setStartTripListener = null;
+    public CancelTripListener setCancelTripListener = null;
 
 
     public  void changeData(List<Trip> tripsData) {
@@ -66,22 +65,22 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
 
 
         //Mido
-        if (setStartTrip != null) { //java is not safty
+        if (setStartTripListener != null) { //java is not safty
             holder.startBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    setStartTrip.onClick(trip);
+                    setStartTripListener.onClick(trip);
                 }
             });
         }
 
 
 
-        if(setDeletTrip != null){
+        if(setCancelTripListener != null){
             holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    setDeletTrip.onClick(trip);
+                    setCancelTripListener.onClick(trip);
                 }
             });
         }
@@ -106,13 +105,13 @@ public class UpcomingTripAdapter extends RecyclerView.Adapter<UpcomingTripAdapte
 
     //Mido
     //to start trip to destinatio
-    public interface StartTrip {
+    public interface StartTripListener {
         void onClick(Trip trip);
     }
 
     //Mido
     //to delete trip
-    public interface DeletTrip{
+    public interface CancelTripListener {
         void onClick(Trip trip);
     }
 

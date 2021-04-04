@@ -15,8 +15,9 @@
         <TextView
             android:id="@+id/item_tv_name"
             android:layout_width="0dp"
+            android:padding="@dimen/_8sdp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
+            android:background="@color/lightBlueTransparent"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             android:gravity="center"

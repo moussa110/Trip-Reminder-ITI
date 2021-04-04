@@ -15,6 +15,7 @@ public class Trip implements Serializable {
     private String endPoint;
     private String date;
     private String time;
+    private String workerTag;
     private String date_time;
     private String email;
     private boolean isDone;
@@ -23,6 +24,7 @@ public class Trip implements Serializable {
     private double startLongitude;
     private double endLatitude;
     private double endLongitude;
+
 
     public Trip() {
         isDone=false;
@@ -44,6 +46,14 @@ public class Trip implements Serializable {
         this.startLongitude = startLongitude;
         this.endLatitude = endLatitude;
         this.endLongitude = endLongitude;
+    }
+
+    public String getWorkerTag() {
+        return workerTag;
+    }
+
+    public void setWorkerTag(String workerTag) {
+        this.workerTag = workerTag;
     }
 
     public int getId() {

@@ -1,11 +1,9 @@
 package com.example.tripreminderapp.ui.upcoming_trips;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,7 +28,6 @@ import com.example.tripreminderapp.databinding.FragmentUpcomingBinding;
 import com.example.tripreminderapp.ui.add_trip.AddTripActivity;
 import com.example.tripreminderapp.ui.trip_details.TripDetailsActivity;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +43,6 @@ public class UpcomingTripsFragment extends Fragment {
     private AlertDialog addToHistory;
     private AlertDialog deletTripDialog;
     private UpcomingTripsViewModel tripsViewModel;
-    private FirebaseAuth auth =FirebaseAuth.getInstance();
 
     List<Trip> trips;
 
@@ -113,7 +109,7 @@ public class UpcomingTripsFragment extends Fragment {
 
 
 
-        upcomingTripAdapter.setStartTrip =new UpcomingTripAdapter.StartTrip() {
+        upcomingTripAdapter.setStartTripListener =new UpcomingTripAdapter.StartTripListener() {
             @Override
             public void onClick(Trip trip) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(getContext())) {
@@ -129,10 +125,10 @@ public class UpcomingTripsFragment extends Fragment {
             }
         };
 
-        upcomingTripAdapter.setDeletTrip = new UpcomingTripAdapter.DeletTrip() {
+        upcomingTripAdapter.setCancelTripListener = new UpcomingTripAdapter.CancelTripListener() {
             @Override
             public void onClick(Trip trip) {
-                showDeleteDialog(trip);
+                showCancelDialog(trip);
             }
         };
 
@@ -213,8 +209,7 @@ public class UpcomingTripsFragment extends Fragment {
         addToHistory.show();
     }
 
-
-    public void showDeleteDialog(Trip trip){
+    public void showCancelDialog(Trip trip){
         LayoutInflater factory = LayoutInflater.from(getActivity());
         View view = factory.inflate(R.layout.custom_dialog_for_delete, null);
         deletTripDialog = new AlertDialog.Builder(getActivity()).create();

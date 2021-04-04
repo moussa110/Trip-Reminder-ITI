@@ -5,6 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.work.WorkManager;
 
 import com.example.tripreminderapp.LoginActivity;
 import com.example.tripreminderapp.database.TripDatabase;
@@ -42,6 +43,7 @@ public class UpcomingTripsViewModel extends AndroidViewModel {
 
     public void updateTrip(Trip trip) {
         database.tripDao().update(trip);
+        WorkManager.getInstance().cancelAllWorkByTag(trip.getWorkerTag());
         getTripsFromDatabase();
     }
 

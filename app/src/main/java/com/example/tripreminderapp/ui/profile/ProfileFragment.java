@@ -47,7 +47,6 @@ public class ProfileFragment extends Fragment
 
         //init view model
         viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
-
         viewModel.getTripsLiveData().observe(getActivity(),trips -> {
             updateView(trips);
         });
@@ -68,6 +67,7 @@ public class ProfileFragment extends Fragment
                 handler.syncDataWithFirebaseDatabase();
             }
         });
+
         binding.profileBtnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
