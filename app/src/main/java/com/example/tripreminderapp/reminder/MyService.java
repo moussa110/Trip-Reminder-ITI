@@ -59,6 +59,8 @@ public class MyService extends Service {
         String date_time =intent.getStringExtra("date_time");
         Log.e("sasasasas", "onStartCommand: "+date_time );
         Trip trip = TripDatabase.getInstance(getApplicationContext()).tripDao().getTripsByDateTime(date_time, LoginActivity.EMAIL).get(0);
+        trip.setCanceled(true);
+        TripDatabase.getInstance(getApplicationContext()).tripDao().update(trip);
         RemoteViews customView =new RemoteViews(getPackageName(), R.layout.notification_reminder);
         Intent notificationIntent =new Intent(getApplicationContext(), HomeActivity.class);
         Intent hungupIntent =new Intent(getApplicationContext(), MyReceiver.class);
