@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/_30sdp"
-    android:layout_marginRight="@dimen/_30sdp"
-    android:elevation="@dimen/_10sdp"
-    app:cardCornerRadius="@dimen/_15sdp">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_300sdp"
+    android:layout_height="@dimen/_300sdp"
+    android:layout_gravity="center"
+    android:background="@drawable/background_dialog">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/logoIv"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:src="@drawable/logo"/>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp">
+        android:text="@string/delete_trip"
+        android:textSize="18sp"
+        android:layout_marginTop="@dimen/_28sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/logoIv"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
 
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:text="@string/delete_trip"
-            android:textSize="@dimen/_14ssp"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn_okay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_28sdp"
-            android:background="@drawable/rounded_border2"
-            android:text="@string/ok"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+    <Button
+        android:id="@+id/btn_okay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_28sdp"
+        android:background="@drawable/rounded_border"
+        android:text="@string/ok"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textView3"
+        android:layout_marginBottom="@dimen/_25sdp"/>
+</RelativeLayout>
