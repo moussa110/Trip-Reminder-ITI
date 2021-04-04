@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -53,7 +55,8 @@ public class HistoryFragment extends Fragment {
 
             @Override
             public void onClick(Trip trip) {
-                historyViewModel.deleteTrip(trip);
+
+                showDeleteDialog(trip);
             }
         };
 
@@ -75,6 +78,7 @@ public class HistoryFragment extends Fragment {
             public void onClick(Note note) {
                 historyViewModel.deleteNoteFromDatabase(note);
                 historyViewModel.getNotesFromDatabase(note.getTripId());
+
             }
         };
 
@@ -146,6 +150,25 @@ public class HistoryFragment extends Fragment {
 
 
         }
+    }
+
+    public void showDeleteDialog(Trip trip){
+        LayoutInflater factory = LayoutInflater.from(getActivity());
+        View view = factory.inflate(R.layout.custom_dialog_for_delete, null);
+        TextView textView=view.findViewById(R.id.textView3);
+        textView.setText(R.string.deleteMessage);
+        AlertDialog deletTripDialog = new AlertDialog.Builder(getActivity()).create();
+        deletTripDialog.setView(view);
+        view.findViewById(R.id.btn_okay).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                historyViewModel.deleteTrip(trip);
+                deletTripDialog.dismiss();
+            }
+        });
+        deletTripDialog.show();
+
+
     }
 
     public void showNotesDialog(List<Note> data) {

@@ -73,4 +73,6 @@
     <string name="Trip_cancel">الرحلات الملغيه</string>
     <string name="no_notes_for_this_trip">لا توجد ملاحظات </string>
     <string name="history">الرحلات السابقة</string>
+    <string name="deleteMessage">هل تريد حذف هذه الرحله؟</string>
+    <string name="you_have_packup_are_you_want_to_sync_data">يوجد لديك نسخة احتياطة, هل تريد مزامنة البيانات؟</string>
 </resources>

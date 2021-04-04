@@ -106,7 +106,7 @@ public  class MapActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Position the map's camera near Alice Springs in the center of Australia,
         // and set the zoom factor so most of Australia shows on the screen.
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Slangtude, Slatitude), 4));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Slangtude, Slatitude), 8));
 
 
         // Set listeners for click events.
@@ -131,7 +131,7 @@ public  class MapActivity extends AppCompatActivity implements OnMapReadyCallbac
                 // Use a custom bitmap as the cap at the start of the line.
                 polyline.setStartCap(
                         new CustomCap(
-                                BitmapDescriptorFactory.fromResource(R.drawable.quantum_ic_arrow_back_grey600_24), 10));
+                                BitmapDescriptorFactory.fromResource(R.drawable.quantum_ic_arrow_back_grey600_24), 18));
                 break;
             case "B":
                 // Use a round cap at the start of the line.

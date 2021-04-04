@@ -11,9 +11,11 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -66,23 +68,11 @@ public class UpcomingTripsFragment extends Fragment {
         });
 
 
-        if (isFirstStartAfterLogin())
-        {
-            if (trips.size()==0) {
-                SharedPreferences.Editor editor=getActivity().getSharedPreferences("start",MODE_PRIVATE).edit();
-                editor.putBoolean("start",false);
-                editor.commit();
 
-                FirebaseHandler handler = new FirebaseHandler(getActivity());
-                handler.getTripsByEmail();
-                handler.onReceiveDataFroFirebase = new FirebaseHandler.OnReceiveDataFroFirebase() {
-                    @Override
-                    public void onReceive(Trip trip) {
-                        tripsViewModel.insertInDatabase(trip);
-                    }
-                };
+            if (trips.size()==0) {
+                fetchBackupData();
             }
-        }
+
 
         upcomingTripAdapter.setAddNoteClickListener = new UpcomingTripAdapter.AddNoteClickListener() {
             @Override
@@ -223,11 +213,44 @@ public class UpcomingTripsFragment extends Fragment {
 
     }
 
-    public boolean isFirstStartAfterLogin(){
-        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("start",MODE_PRIVATE);
-        boolean result=sharedPreferences.getBoolean("start",true);
-        return result;
+    public void fetchBackupData(){
+        LayoutInflater factory = LayoutInflater.from(getActivity());
+        View view = factory.inflate(R.layout.dialog_backup, null);
+        AlertDialog deletTripDialog = new AlertDialog.Builder(getActivity()).create();
+        deletTripDialog.setView(view);
+
+        view.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deletTripDialog.dismiss();
+            }
+        });
+        view.findViewById(R.id.btn_okay).setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+
+                FirebaseHandler handler = new FirebaseHandler(getActivity());
+                handler.getTripsByEmail();
+                handler.onReceiveDataFroFirebase = new FirebaseHandler.OnReceiveDataFroFirebase() {
+                    @Override
+                    public void onReceive(Trip trip) {
+                        tripsViewModel.insertInDatabase(trip);
+                    }
+                };
+                deletTripDialog.dismiss();
+            }
+        });
+        deletTripDialog.show();
+
+
     }
+
+//    public boolean isFirstStartAfterLogin(){
+//        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("start",MODE_PRIVATE);
+//        boolean result=sharedPreferences.getBoolean("start",true);
+//        return result;
+//    }
 
 
 }

@@ -51,7 +51,7 @@
     <string name="Notes">Notes</string>
     <string name="delete_trip">Do You Want To Cancel This Trip?</string>
     <string name="ok">ok</string>
-    <string name="go">Do you want to go to this trip now?</string>
+    <string name="go">Do you want to start this trip now?</string>
 
     <string name="to">To:</string>
     <string name="From">From:</string>
@@ -72,6 +72,8 @@
     <string name="Logout">Logout</string>
     <string name="Trip_done">Trips done</string>
     <string name="Trip_cancel">Trips cancel</string>
-    <string name="no_notes_for_this_trip">no notes for this trip</string>
+    <string name="no_notes_for_this_trip">no notes available</string>
     <string name="history">history</string>
+    <string name="deleteMessage">Are you sure you Want To Delete This Trip?</string>
+    <string name="you_have_packup_are_you_want_to_sync_data">do you want sync your data?</string>
 </resources>

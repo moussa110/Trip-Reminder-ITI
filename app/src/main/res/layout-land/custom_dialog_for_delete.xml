@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_430sdp"
-    android:layout_height="@dimen/_220sdp"
+    android:layout_width="@dimen/_300sdp"
+    android:layout_height="@dimen/_250sdp"
     android:layout_gravity="center"
     android:background="@drawable/background_dialog">
 
     <ImageView
         android:id="@+id/logoIv"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_90sdp"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:src="@drawable/logo"/>
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/delete_trip"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
         android:textSize="18sp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="@dimen/_28sdp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/logoIv"
         android:textColor="@color/black"

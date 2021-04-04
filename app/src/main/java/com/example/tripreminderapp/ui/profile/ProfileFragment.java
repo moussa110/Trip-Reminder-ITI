@@ -1,6 +1,7 @@
 package com.example.tripreminderapp.ui.profile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class ProfileFragment extends Fragment
@@ -74,6 +77,9 @@ public class ProfileFragment extends Fragment
                 FirebaseAuth.getInstance().signOut();
                 LoginActivity.EMAIL="";
                 getActivity().startActivity(new Intent(getActivity(),LoginActivity.class));
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("start", MODE_PRIVATE).edit();
+                editor.putBoolean("start", true);
+                editor.commit();
             }
         });
         return  view;
@@ -85,11 +91,13 @@ public class ProfileFragment extends Fragment
         for (int i =0 ; i <trips.size();i++){
             if (trips.get(i).isDone())
                 done++;
+            if (trips.get(i).isCanceled())
+                cancel++;
         }
 
         binding.profileTvName.setText(user.getDisplayName());
         binding.profileTvDoneCount.setText(""+done);
-        binding.profileTvCancelCount.setText(""+(trips.size()-cancel));
+        binding.profileTvCancelCount.setText(""+cancel);
 
     }
 }
