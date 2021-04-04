@@ -33,7 +33,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="@dimen/_45sdp"
             android:hint="@string/Trip" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,7 +57,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="@dimen/_45sdp"
             android:focusable="false"
             android:hint="@string/Start" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -82,7 +82,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="@dimen/_200sdp"
-            android:layout_height="@dimen/_35sdp"
+            android:layout_height="@dimen/_45sdp"
             android:focusable="false"
             android:hint="@string/End" />
 

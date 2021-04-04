@@ -41,6 +41,10 @@
             android:layout_width="40dp"
             android:layout_height="match_parent"
             android:src="@drawable/ic_alarm_clock" />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/ic_canc"/>
 
     </LinearLayout>
 

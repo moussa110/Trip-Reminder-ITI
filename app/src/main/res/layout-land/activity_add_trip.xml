@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/Trip"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,7 +65,7 @@
             android:drawablePadding="@dimen/_5sdp"
             android:focusable="false"
             android:hint="@string/Start"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +96,7 @@
             android:drawablePadding="@dimen/_5sdp"
             android:focusable="false"
             android:hint="@string/End"
-            android:textColor="#FFFFFF" />
+            android:textColor="@color/black" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -135,7 +135,7 @@
                 android:inputType="date"
                 android:padding="@dimen/_10sdp"
                 android:paddingRight="@dimen/_8sdp"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/black" />
 
 
             <EditText
@@ -154,7 +154,7 @@
                 android:hint="@string/Time"
                 android:inputType="time"
                 android:padding="@dimen/_10sdp"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/black" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -208,7 +208,7 @@
                 android:inputType="date"
                 android:padding="@dimen/_10sdp"
                 android:paddingRight="@dimen/_8sdp"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/black"
                 android:visibility="gone" />
 
 
@@ -228,7 +228,7 @@
                 android:hint="@string/Time"
                 android:inputType="time"
                 android:padding="@dimen/_10sdp"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/black"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>
