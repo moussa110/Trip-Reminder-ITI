@@ -116,10 +116,6 @@ public class UpcomingTripsFragment extends Fragment {
                     Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
                             Uri.parse("package:" + getActivity().getPackageName()));
                     startActivityForResult(intent, 106);
-                } else {
-                    Intent startIntent = new Intent(getContext(), FloatWidgetService.class);
-                    startIntent.putExtra("notes", (ArrayList<Note>) TripDatabase.getInstance(getActivity()).noteDao().getNotes(trip.getId()));
-                    getActivity().startService(startIntent);
                 }
                 showTripDialog(trip);
             }

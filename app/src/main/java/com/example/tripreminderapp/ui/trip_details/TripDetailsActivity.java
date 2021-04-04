@@ -34,6 +34,7 @@ import com.example.tripreminderapp.database.note.Note;
 import com.example.tripreminderapp.database.trip.Trip;
 import com.example.tripreminderapp.databinding.ActivityTripDetailsBinding;
 import com.example.tripreminderapp.reminder.MyService;
+import com.example.tripreminderapp.ui.add_trip.AddTripActivity;
 import com.example.tripreminderapp.ui.upcoming_trips.UpcomingTripAdapter;
 import com.example.tripreminderapp.ui.upcoming_trips.UpcomingTripsFragment;
 import com.google.android.gms.common.api.Status;
@@ -43,6 +44,7 @@ import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -60,6 +62,7 @@ public class TripDetailsActivity extends AppCompatActivity {
     private Trip currentTrip;
     private ActivityTripDetailsBinding binding;
     private TripDetailsViewModel viewModel;
+    private  Calendar mCalendar;
     //private Spinner spinner;
 
     private AlertDialog notesDialog=null;
@@ -68,6 +71,12 @@ public class TripDetailsActivity extends AppCompatActivity {
     //Mido.com
     final Calendar myCalendar = Calendar.getInstance();
     private AlertDialog addNoteDialog=null;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+         mCalendar = Calendar.getInstance();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,8 +124,6 @@ public class TripDetailsActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQ_CODE + 1);
             }
         });
-
-
         binding.imageView11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,7 +143,6 @@ public class TripDetailsActivity extends AppCompatActivity {
                         finish();
                     }
                 });
-
         currentTrip = (Trip) getIntent().getSerializableExtra(UpcomingTripsFragment.UPCOMING_DETAILS_EXTRA);
         binding.edName.getEditText().setText(currentTrip.getName());
         binding.edStartPoint.getEditText().setText(currentTrip.getStartPoint());
@@ -192,66 +198,54 @@ public class TripDetailsActivity extends AppCompatActivity {
                 currentTrip.setDate( binding.edDate.getText().toString());
                 currentTrip.setTime( binding.edTime.getText().toString());
                 currentTrip.setDate_time(binding.edDate.getText()+" "+ binding.edTime.getText().toString());
-                viewModel.updateTripInDatabase(currentTrip);
+
+                Calendar current = Calendar.getInstance();
+                long nowMillis = current.getTimeInMillis();
+                long diff = mCalendar.getTimeInMillis() - nowMillis;
+                viewModel.updateTripInDatabase(currentTrip,diff);
 
             }
         });
 
-        //Mido
-        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                  int dayOfMonth) {
-                // TODO Auto-generated method stub
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
-            }
-
-        };
-
         binding.edDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar c = Calendar.getInstance();
                 DatePickerDialog dialog = new DatePickerDialog(TripDetailsActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String _year = String.valueOf(year);
-                        String _month = (month+1) < 10 ? "0" + (month+1) : String.valueOf(month+1);
-                        String _date = dayOfMonth < 10 ? "0" + dayOfMonth : String.valueOf(dayOfMonth);
-                        String _pickedDate = _year + "-" + _month + "-" + _date;
-                        binding.edDate.setText(_pickedDate);
+                        mCalendar.set(Calendar.YEAR , year);
+                        mCalendar.set(Calendar.MONTH , month);
+                        mCalendar.set(Calendar.DAY_OF_MONTH , dayOfMonth);
+                        String date = DateFormat.getDateInstance(DateFormat.DEFAULT).format(mCalendar.getTime());
+                        binding.edDate.setText(date);
                     }
-                }, c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.MONTH));
+                } , mCalendar.get(Calendar.YEAR), mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH));
+
                 dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 dialog.show();
-
 
             }
         });
 
 
         binding.edTime.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Calendar mcurrentTime = Calendar.getInstance();
-                int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-                int minute = mcurrentTime.get(Calendar.MINUTE);
+                Calendar currentTime = Calendar.getInstance();
+                int hour = currentTime.get(Calendar.HOUR_OF_DAY);
+                int minute = currentTime.get(Calendar.MINUTE);
                 TimePickerDialog mTimePicker;
                 mTimePicker = new TimePickerDialog(TripDetailsActivity.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                        binding.edTime.setText(selectedHour + ":" + selectedMinute);
+                        mCalendar.set(Calendar.MINUTE , selectedMinute);
+                        mCalendar.set(Calendar.HOUR_OF_DAY , selectedHour);
+                        mCalendar.set(Calendar.SECOND , 0);
+                        binding.edTime.setText(selectedHour+ " : " + selectedMinute);
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
                 mTimePicker.show();
-
             }
         });
 
@@ -299,7 +293,6 @@ public class TripDetailsActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
     public void changeBehaviour(Boolean isEditable) {
         if (isEditable) {
             binding.edName.getEditText().setEnabled(true);
@@ -317,14 +310,6 @@ public class TripDetailsActivity extends AppCompatActivity {
             binding.detailsBtnEdit.setText("update");
         }
     }
-
-    private void updateLabel() {
-        String myFormat = "MM/dd/yyyy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        binding.edDate.setText(sdf.format(myCalendar.getTime()));
-    }
-
-
     public void showNotesDialog(List<Note> data) {
         LayoutInflater factory = LayoutInflater.from(this);
         View view = factory.inflate(R.layout.dialog_show_notes, null);
@@ -339,8 +324,6 @@ public class TripDetailsActivity extends AppCompatActivity {
             noNoteTv.setVisibility(View.VISIBLE);
         }
     }
-
-
     public void showNoteDetailsDialog(Note note) {
         final int[] flag = {0};
         LayoutInflater factory = LayoutInflater.from(this);

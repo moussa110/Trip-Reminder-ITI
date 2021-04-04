@@ -20,9 +20,8 @@ public class MyReceiver extends BroadcastReceiver {
 
         Intent intent2 = new Intent(context, MyService.class);
         context.stopService(intent2);
-
-
         displayNotification(context,"trip dismissed!!","don't forget your trip");
+
     }
 
     private void displayNotification(Context context, String title, String task) {
@@ -30,8 +29,6 @@ public class MyReceiver extends BroadcastReceiver {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("channel_id", "channel_name", NotificationManager.IMPORTANCE_DEFAULT);
@@ -43,7 +40,7 @@ public class MyReceiver extends BroadcastReceiver {
                 .setContentText(task)
                 .setContentIntent(pendingIntent)
                 .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                .setSmallIcon(R.drawable.add);
+                .setSmallIcon(R.drawable.applogo);
 
         notificationManager.notify(1125, notification.build());
     }
